@@ -41,7 +41,6 @@
             box-shadow: 0 4px 10px rgba(230, 81, 0, 0.3);
         }
         
-        /* آٹو ونرز ڈسپلے باکس */
         .winner-section { 
             background: linear-gradient(135deg, #0984e3, #6c5ce7); color: white; margin: 30px auto; 
             padding: 20px; border-radius: 15px; max-width: 950px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
@@ -53,21 +52,24 @@
         }
         .winner-number { font-size: 20px; font-weight: bold; color: #ffeaa7; margin-top: 5px; }
 
-        /* پیمنٹ باکس */
         .payment-box { 
             background: white; margin: 35px auto 0 auto; padding: 25px; border-radius: 15px; 
             max-width: 750px; box-shadow: 0 10px 25px rgba(0,0,0,0.12); border-top: 6px solid #e74c3c;
         }
-        .jazzcash-number {
-            color: #c0392b; font-size: 28px; direction: ltr; font-weight: bold; background: #ffeae8;
-            padding: 10px 20px; border-radius: 10px; display: inline-block; margin: 15px 0;
-            letter-spacing: 1px; border: 2px dashed #e74c3c;
-        }
-        .account-title {
-            font-size: 18px; color: #2c3e50; font-weight: bold; margin-bottom: 5px;
+        
+        .jazzcash-badge {
+            background: #d63031; color: white; font-weight: bold; font-size: 18px;
+            padding: 6px 15px; border-radius: 20px; display: inline-block; margin-bottom: 8px;
+            letter-spacing: 1px;
         }
 
-        /* اینٹری اینڈ ٹکٹ ڈسپلے فارم */
+        .jazzcash-number {
+            color: #c0392b; font-size: 28px; direction: ltr; font-weight: bold; background: #ffeae8;
+            padding: 15px 20px; border-radius: 10px; display: inline-block; margin: 10px 0 15px 0;
+            letter-spacing: 1px; border: 2px dashed #e74c3c; width: 100%; max-width: 400px;
+        }
+        .account-title { font-size: 18px; color: #2c3e50; font-weight: bold; margin-top: 5px; }
+
         .ticket-form {
             background: #f8fafc; border: 2px solid #cbd5e1; padding: 20px; border-radius: 12px;
             margin-top: 20px; text-align: right;
@@ -76,10 +78,6 @@
         .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #1e293b; }
         .form-group select, .form-group input {
             width: 100%; padding: 10px; border: 1px solid #94a3b8; border-radius: 6px; font-size: 16px;
-        }
-        .ticket-result {
-            display: none; background: #22c55e; color: white; padding: 15px; border-radius: 8px;
-            text-align: center; margin-top: 15px; font-size: 20px; font-weight: bold;
         }
         
         .form-btn {
@@ -98,7 +96,6 @@
         <p>ٹارگٹ ٹکٹس مکمل ہوتے ہی خودکار (Auto) لکی ونر کا اعلان!</p>
     </header>
 
-    <!-- آٹو ونرز ڈسپلے -->
     <div class="winner-section">
         <h2>🎉 قرعہ اندازی لائیو ونرز (Target Status) 🎉</h2>
         <div class="winner-grid">
@@ -118,120 +115,55 @@
     </div>
 
     <div class="container">
-        <!-- Item 1: iPhone -->
         <div class="card">
             <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500" alt="iPhone 16 Pro">
             <h3>iPhone 16 Pro</h3>
             <p class="price">انٹری فیس: 100 روپے</p>
-            <div class="target-info">
-                <strong>قرعہ اندازی ٹارگٹ:</strong><br>10,000 ٹکٹس کی فروخت پر
-            </div>
-            <a href="#payment" onclick="selectProduct('iPhone 16 Pro')" class="btn">ٹکٹ حاصل کریں</a>
+            <div class="target-info"><strong>قرعہ اندازی ٹارگٹ:</strong><br>10,000 ٹکٹس کی فروخت پر</div>
+            <a href="#payment" class="btn">ٹکٹ حاصل کریں</a>
         </div>
 
-        <!-- Item 2: Motorcycle -->
         <div class="card">
             <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=500" alt="Motorcycle">
             <h3>ہیوی بائیک / موٹر سائیکل</h3>
             <p class="price">انٹری فیس: 50 روپے</p>
-            <div class="target-info">
-                <strong>قرعہ اندازی ٹارگٹ:</strong><br>6,000 ٹکٹس کی فروخت پر
-            </div>
-            <a href="#payment" onclick="selectProduct('ہیوی بائیک')" class="btn">ٹکٹ حاصل کریں</a>
+            <div class="target-info"><strong>قرعہ اندازی ٹارگٹ:</strong><br>6,000 ٹکٹس کی فروخت پر</div>
+            <a href="#payment" class="btn">ٹکٹ حاصل کریں</a>
         </div>
 
-        <!-- Item 3: Fridge -->
         <div class="card">
             <img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=500" alt="Refrigerator">
             <h3>ڈاولینس فریج</h3>
             <p class="price">انٹری فیس: 90 روپے</p>
-            <div class="target-info">
-                <strong>قرعہ اندازی ٹارگٹ:</strong><br>6,000 ٹکٹس کی فروخت پر
-            </div>
-            <a href="#payment" onclick="selectProduct('ڈاولینس فریج')" class="btn">ٹکٹ حاصل کریں</a>
+            <div class="target-info"><strong>قرعہ اندازی ٹارگٹ:</strong><br>6,000 ٹکٹس کی فروخت پر</div>
+            <a href="#payment" class="btn">ٹکٹ حاصل کریں</a>
         </div>
     </div>
 
-    <!-- پیمنٹ اور فارم سیکشن -->
     <div id="payment" class="payment-box">
-        <h2 style="color: #2c3e50; margin-top:0;">پیسے بھیجنے اور ٹکٹ حاصل کرنے کا طریقہ</h2>
-        <p style="font-size: 16px;">1. اپنے JazzCash یا EasyPaisa ایپ سے درج ذیل اکاؤنٹ نمبر پر مطلوبہ انٹری فیس بھیجیں:</p>
+        <h2 style="color: #2c3e50; margin-top:0;">پیسے بھیجنے اور اینٹری کی تصدیق کا طریقہ</h2>
+        <p style="font-size: 16px;">1. درج ذیل <strong>JazzCash</strong> اکاؤنٹ پر مطلوبہ انٹری فیس بھیجیں:</p>
         
-        <div class="jazzcash-number">
-            03037332556
-            <div class="account-title">نام: Muhammad Pervez</div>
+        <div>
+            <div class="jazzcash-badge">JazzCash (جائز کیش)</div><br>
+            <div class="jazzcash-number">
+                03037332556
+                <div class="account-title">نام: Muhammad Pervez</div>
+            </div>
         </div>
         
-        <p style="font-size: 16px;">2. پیسے بھیجنے کے بعد اپنی معلومات درج کر کے اپنا **مخصوص ٹکٹ نمبر** حاصل کریں:</p>
+        <p style="font-size: 16px;">2. پیسے بھیجنے کے بعد گوگل فارم میں تمام تفصیلات، TRX ID اور پیمنٹ کا اسکرین شاٹ جمع کروائیں:</p>
 
-        <!-- ٹکٹ جنریٹر فارم -->
-        <div class="ticket-form">
-            <div class="form-group">
-                <label>انعام منتخب کریں:</label>
-                <select id="selectedProduct">
-                    <option value="iPhone 16 Pro">iPhone 16 Pro (ٹارگٹ: 10,000 ٹکٹس)</option>
-                    <option value="ہیوی بائیک">ہیوی بائیک / موٹر سائیکل (ٹارگٹ: 6,000 ٹکٹس)</option>
-                    <option value="ڈاولینس فریج">ڈاولینس فریج (ٹارگٹ: 6,000 ٹکٹس)</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>پورا نام:</label>
-                <input type="text" id="userName" placeholder="اپنا پورا نام لکھیں">
-            </div>
-            <div class="form-group">
-                <label>واٹس ایپ نمبر:</label>
-                <input type="text" id="userPhone" placeholder="03XXXXXXXXX">
-            </div>
-            <button class="form-btn" onclick="generateTicketNumber()">ٹکٹ جنریٹ کریں</button>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScWzyc8rEwWcHi1ktMKsld0mWKrShGyvGfuSptq2-_rGREzPw/viewform?usp=sharing" target="_blank" class="btn form-btn" style="text-decoration:none; display:block; text-align:center; margin-top: 15px;">گوگل اینٹری فارم پُر کریں (فائل اپلوڈ کریں)</a>
 
-            <div class="ticket-result" id="ticketDisplay">
-                آپ کا مخصوص ٹکٹ نمبر: <span id="userTicketNo" style="color: #fef08a;"></span>
-                <p style="font-size: 14px; font-weight: normal; margin: 5px 0 0 0;">(اس ٹکٹ نمبر کی سکرین شاٹ لے کر گوگل فارم میں لازمی جمع کروائیں)</p>
-            </div>
-        </div>
-
-        <br>
-        <p style="font-size: 16px;">3. اپنا جنریٹ شدہ ٹکٹ نمبر، TRX ID اور پیمنٹ کی اسکرین شاٹ فارم میں اپ لوڈ کریں:</p>
-        
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScWzyc8rEwWcHi1ktMKsld0mWKrShGyvGfuSptq2-_rGREzPw/viewform?usp=sharing" target="_blank" class="btn form-btn" style="text-decoration:none; display:block; text-align:center;">گوگل اینٹری فارم پُر کریں</a>
+        <p style="font-size: 14px; color: #e65100; margin-top: 15px; font-weight: bold;">
+            ⚠️ نوٹ: فارم سبمٹ ہونے کے بعد ایڈمن کی طرف سے پیمنٹ کی تصدیق کی جائے گی۔ منظوری (Approve) پر آپ کو ایک منفرد (Unique) ٹکٹ نمبر جاری کر دیا جائے گا۔
+        </p>
     </div>
 
 </div>
 
 <script>
-    function selectProduct(productName) {
-        document.getElementById('selectedProduct').value = productName;
-    }
-
-    function generateTicketNumber() {
-        let name = document.getElementById('userName').value;
-        let phone = document.getElementById('userPhone').value;
-        let product = document.getElementById('selectedProduct').value;
-
-        if(!name || !phone) {
-            alert('براہ کرم اپنا نام اور واٹس ایپ نمبر درج کریں!');
-            return;
-        }
-
-        let ticketNo = "";
-        
-        if(product.includes("iPhone")) {
-            let randomNum = Math.floor(1 + Math.random() * 10000);
-            ticketNo = "#IPH-" + randomNum;
-        } 
-        else if(product.includes("بائیک")) {
-            let randomNum = Math.floor(1 + Math.random() * 6000);
-            ticketNo = "#BIK-" + randomNum;
-        } 
-        else if(product.includes("فریج")) {
-            let randomNum = Math.floor(1 + Math.random() * 6000);
-            ticketNo = "#FRG-" + randomNum;
-        }
-
-        document.getElementById('userTicketNo').innerText = ticketNo;
-        document.getElementById('ticketDisplay').style.display = 'block';
-    }
-
     function checkTargetAndDraw(soldTickets, targetTickets, elementId, prefix) {
         if (soldTickets >= targetTickets) {
             let winningTicket = Math.floor(Math.random() * targetTickets) + 1;
