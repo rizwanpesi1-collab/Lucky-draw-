@@ -59,9 +59,12 @@
             max-width: 750px; box-shadow: 0 10px 25px rgba(0,0,0,0.12); border-top: 6px solid #e74c3c;
         }
         .jazzcash-number {
-            color: #c0392b; font-size: 32px; direction: ltr; font-weight: bold; background: #ffeae8;
+            color: #c0392b; font-size: 28px; direction: ltr; font-weight: bold; background: #ffeae8;
             padding: 10px 20px; border-radius: 10px; display: inline-block; margin: 15px 0;
-            letter-spacing: 2px; border: 2px dashed #e74c3c;
+            letter-spacing: 1px; border: 2px dashed #e74c3c;
+        }
+        .account-title {
+            font-size: 18px; color: #2c3e50; font-weight: bold; margin-bottom: 5px;
         }
 
         /* اینٹری اینڈ ٹکٹ ڈسپلے فارم */
@@ -154,7 +157,10 @@
         <h2 style="color: #2c3e50; margin-top:0;">پیسے بھیجنے اور ٹکٹ حاصل کرنے کا طریقہ</h2>
         <p style="font-size: 16px;">1. اپنے JazzCash یا EasyPaisa ایپ سے درج ذیل اکاؤنٹ نمبر پر مطلوبہ انٹری فیس بھیجیں:</p>
         
-        <div class="jazzcash-number">03239535494</div>
+        <div class="jazzcash-number">
+            03037332556
+            <div class="account-title">نام: Muhammad Pervez</div>
+        </div>
         
         <p style="font-size: 16px;">2. پیسے بھیجنے کے بعد اپنی معلومات درج کر کے اپنا **مخصوص ٹکٹ نمبر** حاصل کریں:</p>
 
@@ -210,17 +216,14 @@
         let ticketNo = "";
         
         if(product.includes("iPhone")) {
-            // آئی فون کے لیے 1 سے 10,000 تک ٹکٹ آئی ڈی
             let randomNum = Math.floor(1 + Math.random() * 10000);
             ticketNo = "#IPH-" + randomNum;
         } 
         else if(product.includes("بائیک")) {
-            // بائیک کے لیے 1 سے 6,000 تک ٹکٹ آئی ڈی
             let randomNum = Math.floor(1 + Math.random() * 6000);
             ticketNo = "#BIK-" + randomNum;
         } 
         else if(product.includes("فریج")) {
-            // فریج کے لیے 1 سے 6,000 تک ٹکٹ آئی ڈی
             let randomNum = Math.floor(1 + Math.random() * 6000);
             ticketNo = "#FRG-" + randomNum;
         }
