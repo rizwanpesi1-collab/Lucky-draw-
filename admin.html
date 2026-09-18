@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ایڈمن تصدیقی پینل - Lucky Draw Admin</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f8fafc; padding: 20px; direction: rtl; }
+        .header { background: #1e293b; color: white; padding: 15px 20px; border-radius: 10px; text-align: center; margin-bottom: 20px; }
+        .refresh-btn { background: #2563eb; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 15px; margin-bottom: 15px; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        th, td { padding: 12px 15px; border-bottom: 1px solid #e2e8f0; text-align: center; }
+        th { background: #0f172a; color: white; }
+        .trx-badge { background: #fef3c7; color: #92400e; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-family: monospace; }
+        .btn-approve { background: #16a34a; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-left: 5px; }
+        .btn-approve:hover { background: #15803d; }
+        .btn-reject { background: #dc2626; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn-reject:hover { background: #b91c1c; }
+        .img-link { color: #2563eb; text-decoration: underline; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>🔐 ایڈمن اپروول پینل (Admin Approval Panel)</h1>
+        <p>یہاں سے منظور (Approve) کرنے پر صارف کو گوگل شیٹ میں خودبخود <b>منفرد (Unique) ٹکٹ آئی ڈی</b> مل جائے گی۔</p>
+    </div>
+
+    <button class="refresh-btn" onclick="loadPendingData()">🔄 تازه‌ ترین درخواستیں دیکھیں (Refresh)</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>نام</th>
+                <th>فون نمبر</th>
+                <th>پروڈکٹ / انعام</th>
+                <th>TRX ID (جائز کیش)</th>
+                <th>پیمنٹ تصویر</th>
+                <th>ایکشن (Action)</th>
+            </tr>
+        </thead>
+        <tbody id="requestTable">
+            <tr><td colspan="6">ڈیٹا لوڈ ہو رہا ہے...</td></tr>
+        </tbody>
+    </table>
+
+<script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxVwbyKtjG02xTTdSc561gAa6KRUyzZP5FsN84kSStBT5KkYrNIuumK1XDirMHYToQ0Mw/exec"; 
+
+    function loadPendingData() {
+        document.getElementById("requestTable").innerHTML = "<tr><td colspan='6'>تازہ ترین ڈیٹا چیک کیا جا رہا ہے...</td></tr>";
+        fetch(SCRIPT_URL + "?action=getPending")
+            .then(res => res.json())
+            .then(data => {
+                let html = "";
+                if(!data || data.length === 0) {
+                    html = "<tr><td colspan='6' style='color:#16a34a; font-weight:bold;'>کوئی نئی پینڈنگ درخواست نہیں ہے!</td></tr>";
+                } else {
+                    data.forEach(item => {
+                        html += `
+                            <tr>
+                                <td><b>${item.name || '-'}</b></td>
+                                <td>${item.phone || '-'}</td>
+                                <td>${item.product || '-'}</td>
+                                <td><span class="trx-badge">${item.trx || '-'}</span></td>
+                                <td>${item.imageUrl ? `<a href="${item.imageUrl}" target="_blank" class="img-link">🖼️ تصویر دیکھیں</a>` : 'تصویر نہیں ہے'}</td>
+                                <td>
+                                    <button class="btn-approve" onclick="approveUser(${item.row})">Approve ✅</button>
+                                    <button class="btn-reject" onclick="rejectUser(${item.row})">Reject ❌</button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                }
+                document.getElementById("requestTable").innerHTML = html;
+            })
+            .catch(err => {
+                document.getElementById("requestTable").innerHTML = "<tr><td colspan='6' style='color:red;'>ڈیٹا لوڈ کرنے میں مسئلہ آیا!</td></tr>";
+            });
+    }
+
+    function approveUser(row) {
+        if(confirm("کیا آپ اس ادائیگی کی تصدیق کر کے نئی منفرد (Unique) ٹکٹ آئی ڈی جاری کرنا چاہتے ہیں؟")) {
+            fetch(SCRIPT_URL + `?action=approve&row=${row}`)
+                .then(res => res.json())
+                .then(res => {
+                    alert("✅ منظوری مکمل!\nٹکٹ نمبر جاری کر دیا گیا: " + res.ticketNo);
+                    loadPendingData();
+                });
+        }
+    }
+
+    function rejectUser(row) {
+        if(confirm("کیا آپ اس درخواست کو منسوخ (Reject) کرنا چاہتے ہیں؟")) {
+            fetch(SCRIPT_URL + `?action=reject&row=${row}`)
+                .then(res => res.json())
+                .then(res => {
+                    alert("❌ درخواست رد کر دی گئی ہے!");
+                    loadPendingData();
+                });
+        }
+    }
+
+    window.onload = loadPendingData;
+</script>
+
+</body>
+</html>
