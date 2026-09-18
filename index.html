@@ -3,50 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لکی ڈرا اور قرعہ اندازی</title>
+    <title>ٹارگٹ بیسڈ آٹو قرعہ اندازی</title>
     <style>
         body { font-family: system-ui, sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; text-align: center; }
         header { background: #232f3e; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
         .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        .card { background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 280px; padding: 15px; text-align: center; }
-        .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; }
-        .price { font-size: 18px; color: #27ae60; font-weight: bold; margin: 10px 0; }
-        .btn { background: #e67e22; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block; }
+        .card { background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 300px; padding: 15px; text-align: center; }
+        .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; }
+        .price { font-size: 18px; color: #27ae60; font-weight: bold; margin: 8px 0; }
+        .target-info { font-size: 14px; color: #555; background: #eef2f5; padding: 8px; border-radius: 5px; margin: 10px 0; }
+        .btn { background: #e67e22; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block; font-weight: bold; width: 80%; }
+        
+        /* Auto Winner Box Style */
+        .winner-section { background: #16a085; color: white; margin: 25px auto; padding: 20px; border-radius: 10px; max-width: 800px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
+        .winner-grid { display: flex; flex-wrap: wrap; justify-content: space-around; gap: 15px; margin-top: 15px; }
+        .winner-card { background: #0e6251; padding: 10px; border-radius: 8px; width: 220px; font-size: 14px; }
+        .winner-number { font-size: 20px; font-weight: bold; color: #f1c40f; margin-top: 5px; }
+        
         .payment-box { background: #fff; margin-top: 30px; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>ماہانہ لکی ڈرا مقابلے</h1>
-    <p>صرف معمولی فیس میں حصہ لیں اور شاندار انعامات جیتیں!</p>
+    <h1>شفاف آٹو قرعہ اندازی مقابلے</h1>
+    <p>ٹارگٹ ٹکٹس مکمل ہوتے ہی خودکار (Auto) لکی ونر کا اعلان!</p>
 </header>
+
+<!-- آٹو ونرز کا سیکشن -->
+<div class="winner-section">
+    <h2>🎉 آٹو لکی ڈرا ونرز (Target Completed) 🎉</h2>
+    <div class="winner-grid">
+        <div class="winner-card">
+            <strong>iPhone 16 Pro</strong>
+            <div class="winner-number" id="iphoneWinner">ٹارگٹ جاری...</div>
+        </div>
+        <div class="winner-card">
+            <strong>ہیوی بائیک</strong>
+            <div class="winner-number" id="bikeWinner">ٹارگٹ جاری...</div>
+        </div>
+        <div class="winner-card">
+            <strong>ڈاولینس فریج</strong>
+            <div class="winner-number" id="fridgeWinner">ٹارگٹ جاری...</div>
+        </div>
+    </div>
+</div>
 
 <div class="container">
     <!-- Item 1: iPhone -->
     <div class="card">
-        <img src="https://via.placeholder.com/280x180?text=iPhone+16" alt="iPhone 16">
+        <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500" alt="iPhone 16">
         <h3>iPhone 16 Pro</h3>
         <p class="price">انٹری فیس: 100 روپے</p>
-        <p>قرعہ اندازی: ہر مہینے کی 30 تاریخ</p>
+        <div class="target-info">
+            <strong>قرعہ اندازی ٹارگٹ:</strong><br>10,000 ٹکٹس کی فروخت پر
+        </div>
         <a href="#payment" class="btn">ٹکٹ حاصل کریں</a>
     </div>
 
     <!-- Item 2: Motorcycle -->
     <div class="card">
-        <img src="https://via.placeholder.com/280x180?text=Motorcycle" alt="Motorcycle">
+        <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=500" alt="Motorcycle">
         <h3>ہیوی بائیک / موٹر سائیکل</h3>
         <p class="price">انٹری فیس: 50 روپے</p>
-        <p>قرعہ اندازی: ہر مہینے کی 30 تاریخ</p>
+        <div class="target-info">
+            <strong>قرعہ اندازی ٹارگٹ:</strong><br>6,000 ٹکٹس کی فروخت پر
+        </div>
         <a href="#payment" class="btn">ٹکٹ حاصل کریں</a>
     </div>
 
     <!-- Item 3: Fridge -->
     <div class="card">
-        <img src="https://via.placeholder.com/280x180?text=Refrigerator" alt="Refrigerator">
+        <img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=500" alt="Refrigerator">
         <h3>ڈاولینس فریج</h3>
-        <p class="price">انٹری فیس: 30 روپے</p>
-        <p>قرعہ اندازی: ہر مہینے کی 30 تاریخ</p>
+        <p class="price">انٹری فیس: 90 روپے</p>
+        <div class="target-info">
+            <strong>قرعہ اندازی ٹارگٹ:</strong><br>6,000 ٹکٹس کی فروخت پر
+        </div>
         <a href="#payment" class="btn">ٹکٹ حاصل کریں</a>
     </div>
 </div>
@@ -54,10 +87,31 @@
 <div id="payment" class="payment-box">
     <h2>پیسے بھیجنے کا طریقہ</h2>
     <p>1. اپنے JazzCash یا EasyPaisa سے درج ذیل نمبر پر مطلوبہ انٹری فیس بھیجیں:</p>
-    <h3 style="color: #c0392b; font-size: 24px; direction: ltr;">03239535494</h3>
-    <p>2. پیسے بھیجنے کے بعد نیچے دیے گئے بٹن پر کلک کر کے اپنی TRX ID اور فون نمبر فارم میں درج کریں:</p>
-    <a href="GOOGLE_FORM_LINK_HERE" target="_blank" class="btn" style="background: #2980b9;">اینٹری فارم پُر کریں</a>
+    <h3 style="color: #c0392b; font-size: 26px; direction: ltr;">03239535494</h3>
+    <p>2. پیسے بھیجنے کے بعد نیچے دیے گئے بٹن پر کلک کر کے اپنی TRX ID اور واٹس ایپ نمبر فارم میں درج کریں:</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScWzyc8rEwWcHi1ktMKsld0mWKrShGyvGfuSptq2-_rGREzPw/viewform?usp=sharing" target="_blank" class="btn" style="background: #2980b9; width: auto; font-size: 18px;">اینٹری فارم پُر کریں</a>
 </div>
+
+<script>
+    // آٹو قرعہ اندازی فنکشن (ٹارگٹ بیسڈ)
+    function checkTargetAndDraw(soldTickets, targetTickets, elementId) {
+        if (soldTickets >= targetTickets) {
+            // ٹارگٹ پورا ہونے پر 1 سے لے کر ٹارگٹ تک رینڈم ونر منتخب ہوگا
+            let winningTicket = Math.floor(Math.random() * targetTickets) + 1;
+            document.getElementById(elementId).innerText = "جیتنے والا ٹکٹ: #" + winningTicket;
+        } else {
+            document.getElementById(elementId).innerText = soldTickets + " / " + targetTickets + " فروخت";
+        }
+    }
+
+    // یہاں آپ فی الحال جتنی ٹکٹس فروخت ہو چکی ہیں وہ نمبر درج کریں گے
+    // مثال کے طور پر: (موجودہ فروخت، کل ٹارگٹ، اسکرین آئٹم آئی ڈی)
+    window.onload = function() {
+        checkTargetAndDraw(10000, 10000, "iphoneWinner"); // آئی فون کا ٹارگٹ پورا ہونے کا نمونہ
+        checkTargetAndDraw(3450, 6000, "bikeWinner");     // بائیک کی جاری پیشرفت
+        checkTargetAndDraw(1200, 6000, "fridgeWinner");   // فریج کی جاری پیشرفت
+    };
+</script>
 
 </body>
 </html>
