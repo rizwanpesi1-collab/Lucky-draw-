@@ -3,113 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ٹارگٹ بیسڈ آٹو قرعہ اندازی</title>
+    <title>شاندار آٹو لکی ڈرا مقابلے</title>
     <style>
-        body { font-family: system-ui, sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; text-align: center; }
-        header { background: #232f3e; color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        .card { background: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); width: 300px; padding: 15px; text-align: center; }
-        .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; }
-        .price { font-size: 18px; color: #27ae60; font-weight: bold; margin: 8px 0; }
-        .target-info { font-size: 14px; color: #555; background: #eef2f5; padding: 8px; border-radius: 5px; margin: 10px 0; }
-        .btn { background: #e67e22; color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block; font-weight: bold; width: 80%; }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; padding: 0; text-align: center; background-color: #f0f4f8;
+            background-image: url('https://img.freepik.com/free-vector/household-appliances-pattern-background_1284-18451.jpg');
+            background-repeat: repeat; background-size: 350px; color: #333;
+        }
+        .overlay { background: rgba(240, 244, 248, 0.93); min-height: 100vh; padding: 20px 10px 40px 10px; }
+        header { 
+            background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; padding: 25px 15px; 
+            border-radius: 12px; max-width: 950px; margin: 0 auto 25px auto; box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        header h1 { margin: 0 0 10px 0; font-size: 28px; }
+        header p { margin: 0; font-size: 16px; opacity: 0.9; }
+
+        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; max-width: 1000px; margin: 0 auto; }
+        .card { 
+            background: white; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
+            width: 300px; padding: 15px; text-align: center; border: 1px solid #e1e8ed;
+        }
+        .card img { width: 100%; height: 210px; object-fit: cover; border-radius: 10px; }
+        .card h3 { margin: 15px 0 5px 0; color: #2c3e50; font-size: 20px; }
+        .price { font-size: 19px; color: #27ae60; font-weight: bold; margin: 8px 0; }
         
-        /* Auto Winner Box Style */
-        .winner-section { background: #16a085; color: white; margin: 25px auto; padding: 20px; border-radius: 10px; max-width: 800px; box-shadow: 0 4px 8px rgba(0,0,0,0.2); }
-        .winner-grid { display: flex; flex-wrap: wrap; justify-content: space-around; gap: 15px; margin-top: 15px; }
-        .winner-card { background: #0e6251; padding: 10px; border-radius: 8px; width: 220px; font-size: 14px; }
-        .winner-number { font-size: 20px; font-weight: bold; color: #f1c40f; margin-top: 5px; }
+        .target-info { 
+            font-size: 14px; color: #4a5568; background: #edf2f7; padding: 10px; 
+            border-radius: 8px; margin: 12px 0; border-right: 4px solid #3182ce;
+        }
+
+        .btn { 
+            background: linear-gradient(135deg, #ff8c00, #e65100); color: white; border: none; 
+            padding: 12px 20px; border-radius: 8px; cursor: pointer; text-decoration: none; 
+            display: inline-block; font-weight: bold; font-size: 16px; width: 90%;
+            box-shadow: 0 4px 10px rgba(230, 81, 0, 0.3);
+        }
         
-        .payment-box { background: #fff; margin-top: 30px; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        /* آٹو ونرز ڈسپلے باکس */
+        .winner-section { 
+            background: linear-gradient(135deg, #0984e3, #6c5ce7); color: white; margin: 30px auto; 
+            padding: 20px; border-radius: 15px; max-width: 950px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
+        }
+        .winner-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 15px; }
+        .winner-card { 
+            background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(5px); padding: 12px; 
+            border-radius: 10px; width: 260px; font-size: 15px; border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .winner-number { font-size: 20px; font-weight: bold; color: #ffeaa7; margin-top: 5px; }
+
+        /* پیمنٹ باکس */
+        .payment-box { 
+            background: white; margin: 35px auto 0 auto; padding: 25px; border-radius: 15px; 
+            max-width: 750px; box-shadow: 0 10px 25px rgba(0,0,0,0.12); border-top: 6px solid #e74c3c;
+        }
+        .jazzcash-number {
+            color: #c0392b; font-size: 32px; direction: ltr; font-weight: bold; background: #ffeae8;
+            padding: 10px 20px; border-radius: 10px; display: inline-block; margin: 15px 0;
+            letter-spacing: 2px; border: 2px dashed #e74c3c;
+        }
+
+        /* اینٹری اینڈ ٹکٹ ڈسپلے فارم */
+        .ticket-form {
+            background: #f8fafc; border: 2px solid #cbd5e1; padding: 20px; border-radius: 12px;
+            margin-top: 20px; text-align: right;
+        }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #1e293b; }
+        .form-group select, .form-group input {
+            width: 100%; padding: 10px; border: 1px solid #94a3b8; border-radius: 6px; font-size: 16px;
+        }
+        .ticket-result {
+            display: none; background: #22c55e; color: white; padding: 15px; border-radius: 8px;
+            text-align: center; margin-top: 15px; font-size: 20px; font-weight: bold;
+        }
+        
+        .form-btn {
+            background: linear-gradient(135deg, #00b09b, #96c93d); width: 100%; padding: 14px 20px;
+            font-size: 18px; box-shadow: 0 4px 12px rgba(0, 176, 155, 0.3); color: white; border: none;
+            border-radius: 8px; cursor: pointer; font-weight: bold;
+        }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>شفاف آٹو قرعہ اندازی مقابلے</h1>
-    <p>ٹارگٹ ٹکٹس مکمل ہوتے ہی خودکار (Auto) لکی ونر کا اعلان!</p>
-</header>
+<div class="overlay">
 
-<!-- آٹو ونرز کا سیکشن -->
-<div class="winner-section">
-    <h2>🎉 آٹو لکی ڈرا ونرز (Target Completed) 🎉</h2>
-    <div class="winner-grid">
-        <div class="winner-card">
-            <strong>iPhone 16 Pro</strong>
-            <div class="winner-number" id="iphoneWinner">ٹارگٹ جاری...</div>
-        </div>
-        <div class="winner-card">
-            <strong>ہیوی بائیک</strong>
-            <div class="winner-number" id="bikeWinner">ٹارگٹ جاری...</div>
-        </div>
-        <div class="winner-card">
-            <strong>ڈاولینس فریج</strong>
-            <div class="winner-number" id="fridgeWinner">ٹارگٹ جاری...</div>
+    <header>
+        <h1>شاندار آٹو لکی ڈرا مقابلے</h1>
+        <p>ٹارگٹ ٹکٹس مکمل ہوتے ہی خودکار (Auto) لکی ونر کا اعلان!</p>
+    </header>
+
+    <!-- آٹو ونرز ڈسپلے -->
+    <div class="winner-section">
+        <h2>🎉 قرعہ اندازی لائیو ونرز (Target Status) 🎉</h2>
+        <div class="winner-grid">
+            <div class="winner-card">
+                <strong>iPhone 16 Pro</strong>
+                <div class="winner-number" id="iphoneWinner">ٹارگٹ جاری...</div>
+            </div>
+            <div class="winner-card">
+                <strong>ہیوی بائیک / موٹر سائیکل</strong>
+                <div class="winner-number" id="bikeWinner">ٹارگٹ جاری...</div>
+            </div>
+            <div class="winner-card">
+                <strong>ڈاولینس فریج</strong>
+                <div class="winner-number" id="fridgeWinner">ٹارگٹ جاری...</div>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="container">
-    <!-- Item 1: iPhone -->
-    <div class="card">
-        <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500" alt="iPhone 16">
-        <h3>iPhone 16 Pro</h3>
-        <p class="price">انٹری فیس: 100 روپے</p>
-        <div class="target-info">
-            <strong>قرعہ اندازی ٹارگٹ:</strong><br>10,000 ٹکٹس کی فروخت پر
+    <div class="container">
+        <!-- Item 1: iPhone -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500" alt="iPhone 16 Pro">
+            <h3>iPhone 16 Pro</h3>
+            <p class="price">انٹری فیس: 100 روپے</p>
+            <div class="target-info">
+                <strong>قرعہ اندازی ٹارگٹ:</strong><br>10,000 ٹکٹس کی فروخت پر
+            </div>
+            <a href="#payment" onclick="selectProduct('iPhone 16 Pro')" class="btn">ٹکٹ حاصل کریں</a>
         </div>
-        <a href="#payment" class="btn">ٹکٹ حاصل کریں</a>
+
+        <!-- Item 2: Motorcycle -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=500" alt="Motorcycle">
+            <h3>ہیوی بائیک / موٹر سائیکل</h3>
+            <p class="price">انٹری فیس: 50 روپے</p>
+            <div class="target-info">
+                <strong>قرعہ اندازی ٹارگٹ:</strong><br>6,000 ٹکٹس کی فروخت پر
+            </div>
+            <a href="#payment" onclick="selectProduct('ہیوی بائیک')" class="btn">ٹکٹ حاصل کریں</a>
+        </div>
+
+        <!-- Item 3: Fridge -->
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=500" alt="Refrigerator">
+            <h3>ڈاولینس فریج</h3>
+            <p class="price">انٹری فیس: 90 روپے</p>
+            <div class="target-info">
+                <strong>قرعہ اندازی ٹارگٹ:</strong><br>6,000 ٹکٹس کی فروخت پر
+            </div>
+            <a href="#payment" onclick="selectProduct('ڈاولینس فریج')" class="btn">ٹکٹ حاصل کریں</a>
+        </div>
     </div>
 
-    <!-- Item 2: Motorcycle -->
-    <div class="card">
-        <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=500" alt="Motorcycle">
-        <h3>ہیوی بائیک / موٹر سائیکل</h3>
-        <p class="price">انٹری فیس: 50 روپے</p>
-        <div class="target-info">
-            <strong>قرعہ اندازی ٹارگٹ:</strong><br>6,000 ٹکٹس کی فروخت پر
+    <!-- پیمنٹ اور فارم سیکشن -->
+    <div id="payment" class="payment-box">
+        <h2 style="color: #2c3e50; margin-top:0;">پیسے بھیجنے اور ٹکٹ حاصل کرنے کا طریقہ</h2>
+        <p style="font-size: 16px;">1. اپنے JazzCash یا EasyPaisa ایپ سے درج ذیل اکاؤنٹ نمبر پر مطلوبہ انٹری فیس بھیجیں:</p>
+        
+        <div class="jazzcash-number">03239535494</div>
+        
+        <p style="font-size: 16px;">2. پیسے بھیجنے کے بعد اپنی معلومات درج کر کے اپنا **مخصوص ٹکٹ نمبر** حاصل کریں:</p>
+
+        <!-- ٹکٹ جنریٹر فارم -->
+        <div class="ticket-form">
+            <div class="form-group">
+                <label>انعام منتخب کریں:</label>
+                <select id="selectedProduct">
+                    <option value="iPhone 16 Pro">iPhone 16 Pro (ٹارگٹ: 10,000 ٹکٹس)</option>
+                    <option value="ہیوی بائیک">ہیوی بائیک / موٹر سائیکل (ٹارگٹ: 6,000 ٹکٹس)</option>
+                    <option value="ڈاولینس فریج">ڈاولینس فریج (ٹارگٹ: 6,000 ٹکٹس)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>پورا نام:</label>
+                <input type="text" id="userName" placeholder="اپنا پورا نام لکھیں">
+            </div>
+            <div class="form-group">
+                <label>واٹس ایپ نمبر:</label>
+                <input type="text" id="userPhone" placeholder="03XXXXXXXXX">
+            </div>
+            <button class="form-btn" onclick="generateTicketNumber()">ٹکٹ جنریٹ کریں</button>
+
+            <div class="ticket-result" id="ticketDisplay">
+                آپ کا مخصوص ٹکٹ نمبر: <span id="userTicketNo" style="color: #fef08a;"></span>
+                <p style="font-size: 14px; font-weight: normal; margin: 5px 0 0 0;">(اس ٹکٹ نمبر کی سکرین شاٹ لے کر گوگل فارم میں لازمی جمع کروائیں)</p>
+            </div>
         </div>
-        <a href="#payment" class="btn">ٹکٹ حاصل کریں</a>
+
+        <br>
+        <p style="font-size: 16px;">3. اپنا جنریٹ شدہ ٹکٹ نمبر، TRX ID اور پیمنٹ کی اسکرین شاٹ فارم میں اپ لوڈ کریں:</p>
+        
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScWzyc8rEwWcHi1ktMKsld0mWKrShGyvGfuSptq2-_rGREzPw/viewform?usp=sharing" target="_blank" class="btn form-btn" style="text-decoration:none; display:block; text-align:center;">گوگل اینٹری فارم پُر کریں</a>
     </div>
 
-    <!-- Item 3: Fridge -->
-    <div class="card">
-        <img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=500" alt="Refrigerator">
-        <h3>ڈاولینس فریج</h3>
-        <p class="price">انٹری فیس: 90 روپے</p>
-        <div class="target-info">
-            <strong>قرعہ اندازی ٹارگٹ:</strong><br>6,000 ٹکٹس کی فروخت پر
-        </div>
-        <a href="#payment" class="btn">ٹکٹ حاصل کریں</a>
-    </div>
-</div>
-
-<div id="payment" class="payment-box">
-    <h2>پیسے بھیجنے کا طریقہ</h2>
-    <p>1. اپنے JazzCash یا EasyPaisa سے درج ذیل نمبر پر مطلوبہ انٹری فیس بھیجیں:</p>
-    <h3 style="color: #c0392b; font-size: 26px; direction: ltr;">03239535494</h3>
-    <p>2. پیسے بھیجنے کے بعد نیچے دیے گئے بٹن پر کلک کر کے اپنی TRX ID اور واٹس ایپ نمبر فارم میں درج کریں:</p>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScWzyc8rEwWcHi1ktMKsld0mWKrShGyvGfuSptq2-_rGREzPw/viewform?usp=sharing" target="_blank" class="btn" style="background: #2980b9; width: auto; font-size: 18px;">اینٹری فارم پُر کریں</a>
 </div>
 
 <script>
-    // آٹو قرعہ اندازی فنکشن (ٹارگٹ بیسڈ)
-    function checkTargetAndDraw(soldTickets, targetTickets, elementId) {
+    function selectProduct(productName) {
+        document.getElementById('selectedProduct').value = productName;
+    }
+
+    function generateTicketNumber() {
+        let name = document.getElementById('userName').value;
+        let phone = document.getElementById('userPhone').value;
+        let product = document.getElementById('selectedProduct').value;
+
+        if(!name || !phone) {
+            alert('براہ کرم اپنا نام اور واٹس ایپ نمبر درج کریں!');
+            return;
+        }
+
+        let ticketNo = "";
+        
+        if(product.includes("iPhone")) {
+            // آئی فون کے لیے 1 سے 10,000 تک ٹکٹ آئی ڈی
+            let randomNum = Math.floor(1 + Math.random() * 10000);
+            ticketNo = "#IPH-" + randomNum;
+        } 
+        else if(product.includes("بائیک")) {
+            // بائیک کے لیے 1 سے 6,000 تک ٹکٹ آئی ڈی
+            let randomNum = Math.floor(1 + Math.random() * 6000);
+            ticketNo = "#BIK-" + randomNum;
+        } 
+        else if(product.includes("فریج")) {
+            // فریج کے لیے 1 سے 6,000 تک ٹکٹ آئی ڈی
+            let randomNum = Math.floor(1 + Math.random() * 6000);
+            ticketNo = "#FRG-" + randomNum;
+        }
+
+        document.getElementById('userTicketNo').innerText = ticketNo;
+        document.getElementById('ticketDisplay').style.display = 'block';
+    }
+
+    function checkTargetAndDraw(soldTickets, targetTickets, elementId, prefix) {
         if (soldTickets >= targetTickets) {
-            // ٹارگٹ پورا ہونے پر 1 سے لے کر ٹارگٹ تک رینڈم ونر منتخب ہوگا
             let winningTicket = Math.floor(Math.random() * targetTickets) + 1;
-            document.getElementById(elementId).innerText = "جیتنے والا ٹکٹ: #" + winningTicket;
+            document.getElementById(elementId).innerText = "جیتنے والا ٹکٹ: #" + prefix + "-" + winningTicket;
         } else {
             document.getElementById(elementId).innerText = soldTickets + " / " + targetTickets + " فروخت";
         }
     }
 
-    // یہاں آپ فی الحال جتنی ٹکٹس فروخت ہو چکی ہیں وہ نمبر درج کریں گے
-    // مثال کے طور پر: (موجودہ فروخت، کل ٹارگٹ، اسکرین آئٹم آئی ڈی)
     window.onload = function() {
-        checkTargetAndDraw(10000, 10000, "iphoneWinner"); // آئی فون کا ٹارگٹ پورا ہونے کا نمونہ
-        checkTargetAndDraw(3450, 6000, "bikeWinner");     // بائیک کی جاری پیشرفت
-        checkTargetAndDraw(1200, 6000, "fridgeWinner");   // فریج کی جاری پیشرفت
+        checkTargetAndDraw(0, 10000, "iphoneWinner", "IPH");
+        checkTargetAndDraw(0, 6000, "bikeWinner", "BIK");
+        checkTargetAndDraw(0, 6000, "fridgeWinner", "FRG");
     };
 </script>
 
