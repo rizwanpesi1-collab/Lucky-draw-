@@ -70,21 +70,40 @@
         }
         .account-title { font-size: 18px; color: #2c3e50; font-weight: bold; margin-top: 5px; }
 
-        .ticket-form {
-            background: #f8fafc; border: 2px solid #cbd5e1; padding: 20px; border-radius: 12px;
-            margin-top: 20px; text-align: right;
-        }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #1e293b; }
-        .form-group select, .form-group input {
-            width: 100%; padding: 10px; border: 1px solid #94a3b8; border-radius: 6px; font-size: 16px;
-        }
-        
         .form-btn {
             background: linear-gradient(135deg, #00b09b, #96c93d); width: 100%; padding: 14px 20px;
             font-size: 18px; box-shadow: 0 4px 12px rgba(0, 176, 155, 0.3); color: white; border: none;
-            border-radius: 8px; cursor: pointer; font-weight: bold;
+            border-radius: 8px; cursor: pointer; font-weight: bold; text-decoration: none; display: block;
         }
+
+        /* Admin Footer Style */
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #cbd5e1;
+        }
+
+        .admin-login-btn {
+            background: #1e293b; color: white; border: none; padding: 8px 18px;
+            border-radius: 20px; font-size: 13px; cursor: pointer; font-weight: bold;
+        }
+
+        /* Admin Section Styling */
+        #adminPanelSection {
+            display: none; background: white; max-width: 950px; margin: 30px auto;
+            padding: 20px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border: 2px solid #2563eb; text-align: right;
+        }
+
+        .refresh-btn { background: #2563eb; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; }
+        th, td { padding: 10px; border: 1px solid #cbd5e1; text-align: center; font-size: 14px; }
+        th { background: #0f172a; color: white; }
+        
+        .btn-approve { background: #16a34a; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .btn-reject { background: #dc2626; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-right: 5px; }
+        .trx-badge { background: #fef3c7; color: #92400e; padding: 3px 6px; border-radius: 4px; font-weight: bold; font-family: monospace; }
     </style>
 </head>
 <body>
@@ -154,16 +173,52 @@
         
         <p style="font-size: 16px;">2. پیسے بھیجنے کے بعد گوگل فارم میں تمام تفصیلات، TRX ID اور پیمنٹ کا اسکرین شاٹ جمع کروائیں:</p>
 
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScWzyc8rEwWcHi1ktMKsld0mWKrShGyvGfuSptq2-_rGREzPw/viewform?usp=sharing" target="_blank" class="btn form-btn" style="text-decoration:none; display:block; text-align:center; margin-top: 15px;">گوگل اینٹری فارم پُر کریں (فائل اپلوڈ کریں)</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScWzyc8rEwWcHi1ktMKsld0mWKrShGyvGfuSptq2-_rGREzPw/viewform?usp=sharing" target="_blank" class="form-btn">گوگل اینٹری فارم پُر کریں (فائل اپلوڈ کریں)</a>
 
         <p style="font-size: 14px; color: #e65100; margin-top: 15px; font-weight: bold;">
             ⚠️ نوٹ: فارم سبمٹ ہونے کے بعد ایڈمن کی طرف سے پیمنٹ کی تصدیق کی جائے گی۔ منظوری (Approve) پر آپ کو ایک منفرد (Unique) ٹکٹ نمبر جاری کر دیا جائے گا۔
         </p>
     </div>
 
+    <!-- فوٹر اور پاسورڈ پروٹیکٹڈ ایڈمن لاگ ان -->
+    <footer>
+        <p>© 2026 جملہ حقوق محفوظ ہیں۔</p>
+        <button class="admin-login-btn" onclick="openAdminPanel()">🔐 ایڈمن پینل لاگ ان</button>
+    </footer>
+
+    <!-- ایڈمن کنٹرول پینل (پاسورڈ کے بعد کھلے گا) -->
+    <div id="adminPanelSection">
+        <h2 style="color: #1e293b; text-align: center; margin-top:0;">🔐 ایڈمن تصدیقی پینل</h2>
+        <div style="text-align: center; margin-bottom: 15px;">
+            <button class="refresh-btn" onclick="loadPendingData()">🔄 تازه‌ ترین درخواستیں دیکھیں (Refresh)</button>
+        </div>
+
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>نام</th>
+                        <th>فون نمبر</th>
+                        <th>پروڈکٹ / انعام</th>
+                        <th>TRX ID</th>
+                        <th>پیمنٹ تصویر</th>
+                        <th>ایکشن (Action)</th>
+                    </tr>
+                </thead>
+                <tbody id="requestTable">
+                    <tr><td colspan="6">ڈیٹا لوڈ کرنے کے لیے 'Refresh' کا بٹن دبائیں۔</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>
 
 <script>
+    // آپ کا سکرپٹ URL اور نیا پاسورڈ
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxVwbyKtjG02xTTdSc561gAa6KRUyzZP5FsN84kSStBT5KkYrNIuumK1XDirMHYToQ0Mw/exec";
+    const ADMIN_PASSWORD = "RIZWAN671@";
+
     function checkTargetAndDraw(soldTickets, targetTickets, elementId, prefix) {
         if (soldTickets >= targetTickets) {
             let winningTicket = Math.floor(Math.random() * targetTickets) + 1;
@@ -178,6 +233,75 @@
         checkTargetAndDraw(0, 6000, "bikeWinner", "BIK");
         checkTargetAndDraw(0, 6000, "fridgeWinner", "FRG");
     };
+
+    // پاسورڈ چیک کرنے کا طریقہ
+    function openAdminPanel() {
+        let pwd = prompt("ایڈمن پینل کھولنے کے لیے پاسورڈ درج کریں:");
+        if (pwd === ADMIN_PASSWORD) {
+            document.getElementById('adminPanelSection').style.display = 'block';
+            window.scrollTo({ top: document.getElementById('adminPanelSection').offsetTop, behavior: 'smooth' });
+            loadPendingData();
+        } else if (pwd !== null) {
+            alert("❌ غلط پاسورڈ! آپ کو ایڈمن پینل تک رسائی حاصل نہیں ہے۔");
+        }
+    }
+
+    // ایڈمن ڈیٹا لوڈ کرنا
+    function loadPendingData() {
+        document.getElementById("requestTable").innerHTML = "<tr><td colspan='6'>تازہ ترین ڈیٹا چیک کیا جا رہا ہے...</td></tr>";
+        fetch(SCRIPT_URL + "?action=getPending")
+            .then(res => res.json())
+            .then(data => {
+                let html = "";
+                if(!data || data.length === 0) {
+                    html = "<tr><td colspan='6' style='color:#16a34a; font-weight:bold;'>کوئی نئی پینڈنگ درخواست نہیں ہے!</td></tr>";
+                } else {
+                    data.forEach(item => {
+                        html += `
+                            <tr>
+                                <td><b>${item.name || '-'}</b></td>
+                                <td>${item.phone || '-'}</td>
+                                <td>${item.product || '-'}</td>
+                                <td><span class="trx-badge">${item.trx || '-'}</span></td>
+                                <td>${item.imageUrl ? `<a href="${item.imageUrl}" target="_blank" style="color:#2563eb; font-weight:bold;">🖼️ تصویر دیکھیں</a>` : 'تصویر نہیں ہے'}</td>
+                                <td>
+                                    <button class="btn-approve" onclick="approveUser(${item.row})">Approve ✅</button>
+                                    <button class="btn-reject" onclick="rejectUser(${item.row})">Reject ❌</button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                }
+                document.getElementById("requestTable").innerHTML = html;
+            })
+            .catch(err => {
+                document.getElementById("requestTable").innerHTML = "<tr><td colspan='6' style='color:red;'>ڈیٹا لوڈ کرنے میں مسئلہ آیا!</td></tr>";
+            });
+    }
+
+    // اپروو کرنا
+    function approveUser(row) {
+        if(confirm("کیا آپ اس ادائیگی کی تصدیق کر کے نئی منفرد (Unique) ٹکٹ آئی ڈی جاری کرنا چاہتے ہیں؟")) {
+            fetch(SCRIPT_URL + `?action=approve&row=${row}`)
+                .then(res => res.json())
+                .then(res => {
+                    alert("✅ منظوری مکمل!\nنیا منفرد ٹکٹ نمبر جاری کر دیا گیا: " + res.ticketNo);
+                    loadPendingData();
+                });
+        }
+    }
+
+    // ریجیکٹ کرنا
+    function rejectUser(row) {
+        if(confirm("کیا آپ اس درخواست کو منسوخ (Reject) کرنا چاہتے ہیں؟")) {
+            fetch(SCRIPT_URL + `?action=reject&row=${row}`)
+                .then(res => res.json())
+                .then(res => {
+                    alert("❌ درخواست رد کر دی گئی ہے!");
+                    loadPendingData();
+                });
+        }
+    }
 </script>
 
 </body>
