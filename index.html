@@ -145,12 +145,29 @@
         <!-- TAB 3: Admin Panel -->
         <div id="tab-admin" class="space-y-8 hidden">
             
+            <!-- NEW SECTION: Manage 5 Payment Accounts -->
+            <section class="border border-indigo-500/30 bg-slate-900 rounded-2xl p-5 md:p-6 shadow-2xl">
+                <h3 class="text-lg font-bold text-indigo-400 mb-1 urdu-font flex items-center gap-2">
+                    <i class="fa-solid fa-credit-card"></i> پیمنٹ / ڈپازٹ اکاؤنٹس سیٹ کریں (5 اکاؤنٹس)
+                </h3>
+                <p class="text-xs text-slate-400 mb-6 urdu-font">یہاں اپنے 5 پیمنٹ نمبرز درج کریں جن پر آپ صارفین سے پیمنٹ وصول کرنا چاہتے ہیں۔</p>
+
+                <form onsubmit="savePaymentAccounts(event)" class="space-y-4 urdu-font">
+                    <div id="admin-accounts-inputs-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <!-- Dynamic 5 Input Fields Rendered Here -->
+                    </div>
+                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-6 py-2.5 rounded-xl transition text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-floppy-disk"></i> اکاؤنٹس محفوظ کریں (Save Accounts)
+                    </button>
+                </form>
+            </section>
+
             <!-- SECTION A: Add New Product Form -->
             <section class="border border-amber-500/30 bg-slate-900 rounded-2xl p-5 md:p-6 shadow-2xl">
                 <h3 class="text-lg font-bold text-amber-400 mb-1 urdu-font flex items-center gap-2">
                     <i class="fa-solid fa-plus-circle"></i> نیا پروڈکٹ شامل کریں (Add New Product)
                 </h3>
-                <p class="text-xs text-slate-400 mb-6 urdu-font">یہاں سے نیا پروڈکٹ اور اس کی تصویر ایڈ کریں تاکہ وہ سائٹ پر لائیو ہو جائے۔</p>
+                <p class="text-xs text-slate-400 mb-6 urdu-font">یہاں سے نیا پروڈکٹ، مناسب ٹارگٹ اور اس کی تصویر ایڈ کریں۔</p>
 
                 <form onsubmit="handleAddNewProduct(event)" class="grid grid-cols-1 md:grid-cols-2 gap-4 urdu-font">
                     <div>
@@ -167,13 +184,11 @@
                     </div>
                     <div>
                         <label class="block text-xs text-slate-300 mb-1">ٹارگٹ رقم (Target Amount)</label>
-                        <input type="number" id="prod-target" min="1" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400" placeholder="مثلاً: 50000">
+                        <input type="number" id="prod-target" min="1" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400" placeholder="مثلاً: 15000">
                     </div>
                     
                     <div class="md:col-span-2 space-y-2">
                         <label class="block text-xs text-slate-300">پروڈکٹ کی تصویر (Image Upload / URL)</label>
-                        
-                        <!-- File Upload Selection -->
                         <div class="flex flex-col sm:flex-row gap-3 items-center">
                             <input type="file" id="prod-file-input" accept="image/*" onchange="convertImageToBase64(this)" class="w-full sm:w-1/2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-amber-500 file:text-slate-950 hover:file:bg-amber-400 cursor-pointer">
                             <span class="text-xs text-slate-500 font-bold">یا</span>
@@ -189,7 +204,30 @@
                 </form>
             </section>
 
-            <!-- SECTION B: Deposit Approvals -->
+            <!-- SECTION B: Manage Existing Products (Edit / Delete) -->
+            <section class="border border-slate-800 bg-slate-900 rounded-2xl p-5 md:p-6 shadow-xl">
+                <h3 class="text-lg font-bold text-white mb-4 urdu-font flex items-center gap-2">
+                    <i class="fa-solid fa-boxes-stack text-amber-400"></i> موجودہ پروڈکٹس کو ایڈٹ کریں (Manage Products)
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-right text-xs text-slate-300 urdu-font">
+                        <thead class="text-[10px] uppercase bg-slate-950 text-slate-400 border-b border-slate-800">
+                            <tr>
+                                <th class="py-3 px-4">تصویر</th>
+                                <th class="py-3 px-4">نام</th>
+                                <th class="py-3 px-4">کوڈ</th>
+                                <th class="py-3 px-4">انٹری فیس</th>
+                                <th class="py-3 px-4">ٹارگٹ رقم</th>
+                                <th class="py-3 px-4">جمع شدہ رقم</th>
+                                <th class="py-3 px-4">ایکشن</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-products-list" class="divide-y divide-slate-800"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SECTION C: Deposit Approvals -->
             <section class="border border-red-500/30 bg-slate-950 rounded-2xl p-5 md:p-6 shadow-2xl">
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 border-b border-slate-800 pb-4">
                     <div>
@@ -221,7 +259,48 @@
 
     </main>
 
-    <!-- MODAL 1: Admin Security Password -->
+    <!-- MODAL 1: Edit Product Modal -->
+    <div id="edit-product-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-slate-900 border border-amber-500/40 w-full max-w-lg rounded-2xl p-6 relative shadow-2xl">
+            <button onclick="closeModal('edit-product-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 class="text-lg font-bold text-amber-400 mb-4 urdu-font flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square"></i> پروڈکٹ میں تبدیلی کریں (Edit Product)
+            </h3>
+            
+            <form onsubmit="saveProductEdit(event)" class="space-y-3 urdu-font">
+                <input type="hidden" id="edit-prod-id">
+                <div>
+                    <label class="block text-xs text-slate-300 mb-1">پروڈکٹ کا نام</label>
+                    <input type="text" id="edit-prod-title" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs text-slate-300 mb-1">انٹری فیس (روپے)</label>
+                        <input type="number" id="edit-prod-fee" min="1" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-300 mb-1">ٹارگٹ رقم (Target)</label>
+                        <input type="number" id="edit-prod-target" min="1" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs text-slate-300 mb-1">تصویر کا لنک (Image URL)</label>
+                    <input type="url" id="edit-prod-image" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400">
+                </div>
+                
+                <div class="pt-3 flex gap-2">
+                    <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 rounded-xl transition text-sm">
+                        تبدیلیاں محفوظ کریں
+                    </button>
+                    <button type="button" onclick="closeModal('edit-product-modal')" class="w-1/3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2.5 rounded-xl transition text-sm">
+                        منسوخ کریں
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: Admin Security Password -->
     <div id="admin-auth-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
         <div class="bg-slate-900 border border-red-500/40 w-full max-w-sm rounded-2xl p-6 relative shadow-2xl">
             <button onclick="closeModal('admin-auth-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -239,7 +318,7 @@
         </div>
     </div>
 
-    <!-- MODAL 2: Deposit Balance -->
+    <!-- MODAL 3: Deposit Balance -->
     <div id="deposit-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative shadow-2xl max-h-[90vh] overflow-y-auto">
             <button onclick="closeModal('deposit-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
@@ -267,7 +346,7 @@
         </div>
     </div>
 
-    <!-- MODAL 3: Skill Quiz Engine -->
+    <!-- MODAL 4: Skill Quiz Engine -->
     <div id="quiz-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
         <div class="bg-slate-900 border border-amber-500/30 w-full max-w-md rounded-2xl p-6 relative shadow-2xl">
             <button onclick="closeModal('quiz-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -288,26 +367,26 @@
         const ADMIN_PASSWORD = "AdminSecured2026!";
         let uploadedBase64Image = "";
 
-        const paymentAccounts = [
-            { type: "JazzCash", title: "آپ کا نام", number: "03000000000" },
-            { type: "EasyPaisa", title: "آپ کا نام", number: "03000000000" },
-            { type: "JazzCash (2)", title: "آپ کا نام", number: "03000000000" },
-            { type: "EasyPaisa (2)", title: "آپ کا نام", number: "03000000000" },
-            { type: "Raast ID", title: "آپ کا نام", number: "03000000000" }
+        const defaultPaymentAccounts = [
+            { type: "JazzCash 1", title: "محمد رضوان", number: "03001234567" },
+            { type: "EasyPaisa 1", title: "محمد رضوان", number: "03111234567" },
+            { type: "JazzCash 2", title: "اکاؤنٹ 2", number: "03007654321" },
+            { type: "EasyPaisa 2", title: "اکاؤنٹ 2", number: "03117654321" },
+            { type: "Raast / Bank", title: "ملاقاتی بینک", number: "PK00123456789" }
         ];
 
-        // Default State Configuration
         const defaultState = {
             userBalance: 0,
             activeContestId: null,
+            paymentAccounts: defaultPaymentAccounts,
             contests: [
                 { 
                     id: "c1", 
                     code: "FRIDGE", 
                     title: "Deep Refrigerator", 
-                    fee: 2, 
+                    fee: 20, 
                     image: "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=600&q=80", 
-                    target: 75000, 
+                    target: 12000, 
                     current: 0, 
                     ticketCounter: 0 
                 },
@@ -315,9 +394,9 @@
                     id: "c2", 
                     code: "BIKE", 
                     title: "70cc Motorcycle", 
-                    fee: 5, 
+                    fee: 50, 
                     image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=600&q=80", 
-                    target: 25000, 
+                    target: 35000, 
                     current: 0, 
                     ticketCounter: 0 
                 },
@@ -327,7 +406,7 @@
                     title: "iPhone 16 Pro Max", 
                     fee: 65, 
                     image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=80", 
-                    target: 455000, 
+                    target: 45000, 
                     current: 0, 
                     ticketCounter: 0 
                 }
@@ -342,23 +421,19 @@
             { q: "پاکستان کا قومی پھول کون سا ہے؟", options: ["چمبیلی", "گلاب", "سورج مکھی"], correct: 0 },
             { q: "ایک ہفتے میں کتنے دن ہوتے ہیں؟", options: ["5 دن", "6 دن", "7 دن"], correct: 2 },
             { q: "سورج کس سمت سے نکلتا ہے؟", options: ["مغرب", "مشرق", "شمال"], correct: 1 },
-            { q: "پاکستان کس سال آزاد ہوا؟", options: ["1947", "1950", "1965"], correct: 0 },
-            { q: "پاکستان کا قومی ترانہ کس نے لکھا؟", options: ["علامہ اقبال", "حفیظ جالندھری", "فیض احمد فیض"], correct: 1 },
-            { q: "ایک سال میں کتنے مہینے ہوتے ہیں؟", options: ["10 مہینے", "12 مہینے", "14 مہینے"], correct: 1 },
-            { q: "پاکستان کے دارالحکومت کا نام کیا ہے؟", options: ["لاہور", "کراچی", "اسلام آباد"], correct: 2 },
-            { q: "ہمارے ملک کا نام کیا ہے؟", options: ["پاکستان", "بھارت", "چین"], correct: 0 },
-            { q: "ایک دن میں کتنے گھنٹے ہوتے ہیں؟", options: ["12 گھنٹے", "24 گھنٹے", "48 گھنٹے"], correct: 1 }
+            { q: "پاکستان کس سال آزاد ہوا؟", options: ["1947", "1950", "1965"], correct: 0 }
         ];
 
-        let state = JSON.parse(localStorage.getItem('quiz_app_v10_state')) || defaultState;
+        let state = JSON.parse(localStorage.getItem('quiz_app_v12_state')) || defaultState;
+        if (!state.paymentAccounts) state.paymentAccounts = defaultPaymentAccounts;
 
         function saveState() {
-            localStorage.setItem('quiz_app_v10_state', JSON.stringify(state));
+            localStorage.setItem('quiz_app_v12_state', JSON.stringify(state));
         }
 
         function resetData() {
             if(confirm("کیا آپ واقعی تمام ڈیٹا اور بیلنس صفر کرنا چاہتے ہیں؟")) {
-                localStorage.removeItem('quiz_app_v10_state');
+                localStorage.removeItem('quiz_app_v12_state');
                 state = JSON.parse(JSON.stringify(defaultState));
                 saveState();
                 location.reload();
@@ -374,7 +449,40 @@
             renderPaymentAccounts();
         });
 
-        // Convert Uploaded Image File to Base64 Text
+        // Render & Save Payment Accounts (5 Numbers)
+        function renderPaymentAccounts() {
+            const container = document.getElementById('accounts-list-container');
+            container.innerHTML = state.paymentAccounts.map((acc) => `
+                <div class="bg-slate-950 border border-slate-800 hover:border-amber-500/40 p-3 rounded-xl flex items-center justify-between transition">
+                    <div class="text-right urdu-font">
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded font-bold">${acc.type}</span>
+                            <span class="text-xs text-slate-300 font-semibold">${acc.title}</span>
+                        </div>
+                        <p class="text-sm font-mono font-bold text-white mt-1 tracking-wider">${acc.number}</p>
+                    </div>
+                    <button type="button" onclick="copyNumber('${acc.number}')" class="bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-slate-300 text-xs px-3 py-1.5 rounded-lg border border-slate-700 transition flex items-center gap-1 active:scale-95 urdu-font">
+                        <i class="fa-regular fa-copy"></i> کاپی
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function savePaymentAccounts(e) {
+            e.preventDefault();
+            const updated = [];
+            for (let i = 0; i < 5; i++) {
+                const type = document.getElementById(`acc-type-${i}`).value;
+                const title = document.getElementById(`acc-title-${i}`).value;
+                const number = document.getElementById(`acc-num-${i}`).value;
+                updated.push({ type, title, number });
+            }
+            state.paymentAccounts = updated;
+            saveState();
+            renderPaymentAccounts();
+            alert("پیمنٹ کے 5 اکاؤنٹس کامیابی سے اپ ڈیٹ کر دیے گئے ہیں!");
+        }
+
         function convertImageToBase64(input) {
             const file = input.files[0];
             if (file) {
@@ -386,7 +494,6 @@
             }
         }
 
-        // Add New Product Functionality (Admin)
         function handleAddNewProduct(e) {
             e.preventDefault();
 
@@ -396,7 +503,6 @@
             const target = parseFloat(document.getElementById('prod-target').value);
             const urlInput = document.getElementById('prod-image-url').value;
 
-            // Priority: File Upload > URL Input > Fallback Image
             let finalImage = uploadedBase64Image || urlInput || "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80";
 
             const newContest = {
@@ -413,30 +519,53 @@
             state.contests.push(newContest);
             saveState();
 
-            // Reset Form Fields
             e.target.reset();
             uploadedBase64Image = "";
 
             renderContests();
+            renderAdminPanel();
             alert(`نیا پروڈکٹ "${title}" کامیابی سے شائع کر دیا گیا ہے!`);
         }
 
-        function renderPaymentAccounts() {
-            const container = document.getElementById('accounts-list-container');
-            container.innerHTML = paymentAccounts.map((acc) => `
-                <div class="bg-slate-950 border border-slate-800 hover:border-amber-500/40 p-3 rounded-xl flex items-center justify-between transition">
-                    <div class="text-right urdu-font">
-                        <div class="flex items-center gap-2">
-                            <span class="text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded font-bold">${acc.type}</span>
-                            <span class="text-xs text-slate-300 font-semibold">${acc.title}</span>
-                        </div>
-                        <p class="text-sm font-mono font-bold text-white mt-1 tracking-wider">${acc.number}</p>
-                    </div>
-                    <button type="button" onclick="copyNumber('${acc.number}')" class="bg-slate-900 hover:bg-amber-500 hover:text-slate-950 text-slate-300 text-xs px-3 py-1.5 rounded-lg border border-slate-700 transition flex items-center gap-1 active:scale-95 urdu-font">
-                        <i class="fa-regular fa-copy"></i> کاپی
-                    </button>
-                </div>
-            `).join('');
+        function openEditProductModal(id) {
+            const prod = state.contests.find(c => c.id === id);
+            if(!prod) return;
+
+            document.getElementById('edit-prod-id').value = prod.id;
+            document.getElementById('edit-prod-title').value = prod.title;
+            document.getElementById('edit-prod-fee').value = prod.fee;
+            document.getElementById('edit-prod-target').value = prod.target;
+            document.getElementById('edit-prod-image').value = prod.image;
+
+            openModal('edit-product-modal');
+        }
+
+        function saveProductEdit(e) {
+            e.preventDefault();
+            const id = document.getElementById('edit-prod-id').value;
+            const prod = state.contests.find(c => c.id === id);
+
+            if(prod) {
+                prod.title = document.getElementById('edit-prod-title').value;
+                prod.fee = parseFloat(document.getElementById('edit-prod-fee').value);
+                prod.target = parseFloat(document.getElementById('edit-prod-target').value);
+                prod.image = document.getElementById('edit-prod-image').value || prod.image;
+
+                saveState();
+                renderContests();
+                renderAdminPanel();
+                closeModal('edit-product-modal');
+                alert("پروڈکٹ کی معلومات کامیابی سے تبدیل کر دی گئی ہیں!");
+            }
+        }
+
+        function deleteProduct(id) {
+            if(confirm("کیا آپ واقعی اس پروڈکٹ کو ختم کرنا چاہتے ہیں؟")) {
+                state.contests = state.contests.filter(c => c.id !== id);
+                saveState();
+                renderContests();
+                renderAdminPanel();
+            }
         }
 
         function copyNumber(text) {
@@ -660,6 +789,48 @@
         }
 
         function renderAdminPanel() {
+            // Render 5 Payment Account Inputs in Admin
+            const accContainer = document.getElementById('admin-accounts-inputs-container');
+            accContainer.innerHTML = state.paymentAccounts.map((acc, idx) => `
+                <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
+                    <span class="text-[10px] font-bold text-indigo-400 uppercase">اکاؤنٹ #${idx + 1}</span>
+                    <div>
+                        <label class="block text-[11px] text-slate-400">قسم / لیبل (مثلاً JazzCash)</label>
+                        <input type="text" id="acc-type-${idx}" value="${acc.type}" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] text-slate-400">اکاؤنٹ ہولڈر کا نام</label>
+                        <input type="text" id="acc-title-${idx}" value="${acc.title}" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-white">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] text-slate-400">اکاؤنٹ / موبائل نمبر</label>
+                        <input type="text" id="acc-num-${idx}" value="${acc.number}" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-amber-400 font-mono font-bold">
+                    </div>
+                </div>
+            `).join('');
+
+            // Render Manage Products Table
+            const prodBody = document.getElementById('admin-products-list');
+            prodBody.innerHTML = state.contests.map(c => `
+                <tr>
+                    <td class="py-2.5 px-4"><img src="${c.image}" class="w-10 h-10 object-cover rounded-lg border border-slate-700"></td>
+                    <td class="py-2.5 px-4 font-bold text-white">${c.title}</td>
+                    <td class="py-2.5 px-4 font-mono text-amber-400">${c.code}</td>
+                    <td class="py-2.5 px-4 text-slate-300">${c.fee} روپے</td>
+                    <td class="py-2.5 px-4 text-emerald-400 font-bold">${c.target} روپے</td>
+                    <td class="py-2.5 px-4 text-slate-400">${c.current} روپے</td>
+                    <td class="py-2.5 px-4 flex gap-2 pt-4">
+                        <button onclick="openEditProductModal('${c.id}')" class="bg-amber-500/20 hover:bg-amber-500 text-amber-400 hover:text-slate-950 border border-amber-500/40 text-[11px] px-2.5 py-1 rounded-lg transition font-bold">
+                            <i class="fa-solid fa-pen"></i> ایڈٹ
+                        </button>
+                        <button onclick="deleteProduct('${c.id}')" class="bg-red-500/20 hover:bg-red-600 text-red-400 hover:text-white border border-red-500/40 text-[11px] px-2.5 py-1 rounded-lg transition font-bold">
+                            <i class="fa-solid fa-trash"></i> ختم کریں
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+
+            // Render Pending Deposits
             const tbody = document.getElementById('admin-pending-body');
             if (state.pendingDeposits.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-slate-500 text-xs urdu-font">کوئی درخواست التواء میں نہیں ہے۔</td></tr>`;
