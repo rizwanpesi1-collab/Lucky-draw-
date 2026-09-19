@@ -3,319 +3,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شاندار آٹو لکی ڈرا مقابلے</title>
+    <title>پروموشنل کوئز اینڈ ون - شفاف والٹ و مقابلے</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            margin: 0; padding: 0; text-align: center; background-color: #f0f4f8;
-            background-image: url('https://img.freepik.com/free-vector/household-appliances-pattern-background_1284-18451.jpg');
-            background-repeat: repeat; background-size: 350px; color: #333;
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Jameel+Noori+Nastaleeq&family=Poppins:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Poppins', 'Noto Nastaliq Urdu', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
         }
-        .overlay { background: rgba(240, 244, 248, 0.93); min-height: 100vh; padding: 20px 10px 40px 10px; }
-        header { 
-            background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; padding: 25px 15px; 
-            border-radius: 12px; max-width: 950px; margin: 0 auto 25px auto; box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        .modal {
+            transition: opacity 0.25s ease;
         }
-        header h1 { margin: 0 0 10px 0; font-size: 28px; }
-        header p { margin: 0; font-size: 16px; opacity: 0.9; }
-
-        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; max-width: 1000px; margin: 0 auto; }
-        .card { 
-            background: white; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
-            width: 300px; padding: 15px; text-align: center; border: 1px solid #e1e8ed;
-        }
-        .card img { width: 100%; height: 210px; object-fit: cover; border-radius: 10px; }
-        .card h3 { margin: 15px 0 5px 0; color: #2c3e50; font-size: 20px; }
-        .price { font-size: 19px; color: #27ae60; font-weight: bold; margin: 8px 0; }
-        
-        .target-info { 
-            font-size: 14px; color: #4a5568; background: #edf2f7; padding: 10px; 
-            border-radius: 8px; margin: 12px 0; border-right: 4px solid #3182ce;
-        }
-
-        .btn { 
-            background: linear-gradient(135deg, #ff8c00, #e65100); color: white; border: none; 
-            padding: 12px 20px; border-radius: 8px; cursor: pointer; text-decoration: none; 
-            display: inline-block; font-weight: bold; font-size: 16px; width: 90%;
-            box-shadow: 0 4px 10px rgba(230, 81, 0, 0.3);
-        }
-        
-        .winner-section { 
-            background: linear-gradient(135deg, #0984e3, #6c5ce7); color: white; margin: 30px auto; 
-            padding: 20px; border-radius: 15px; max-width: 950px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); 
-        }
-        .live-notice {
-            background: rgba(0, 0, 0, 0.25); padding: 12px; border-radius: 8px; margin-bottom: 15px;
-            font-size: 15px; line-height: 1.6; border: 1px dashed #ffeaa7;
-        }
-        .yt-link {
-            color: #ffeaa7; font-weight: bold; text-decoration: underline; margin-top: 5px; display: inline-block;
-        }
-        .winner-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 15px; }
-        .winner-card { 
-            background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(5px); padding: 12px; 
-            border-radius: 10px; width: 260px; font-size: 15px; border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .winner-number { font-size: 20px; font-weight: bold; color: #ffeaa7; margin-top: 5px; }
-
-        .payment-box { 
-            background: white; margin: 35px auto 0 auto; padding: 25px; border-radius: 15px; 
-            max-width: 750px; box-shadow: 0 10px 25px rgba(0,0,0,0.12); border-top: 6px solid #e74c3c;
-        }
-        
-        .jazzcash-badge {
-            background: #d63031; color: white; font-weight: bold; font-size: 18px;
-            padding: 6px 15px; border-radius: 20px; display: inline-block; margin-bottom: 8px;
-            letter-spacing: 1px;
-        }
-
-        .jazzcash-number {
-            color: #c0392b; font-size: 28px; direction: ltr; font-weight: bold; background: #ffeae8;
-            padding: 15px 20px; border-radius: 10px; display: inline-block; margin: 10px 0 15px 0;
-            letter-spacing: 1px; border: 2px dashed #e74c3c; width: 100%; max-width: 400px;
-        }
-        .account-title { font-size: 18px; color: #2c3e50; font-weight: bold; margin-top: 5px; }
-
-        .form-btn {
-            background: linear-gradient(135deg, #00b09b, #96c93d); width: 100%; padding: 14px 20px;
-            font-size: 18px; box-shadow: 0 4px 12px rgba(0, 176, 155, 0.3); color: white; border: none;
-            border-radius: 8px; cursor: pointer; font-weight: bold; text-decoration: none; display: block;
-        }
-
-        /* Admin Footer Style */
-        footer {
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid #cbd5e1;
-        }
-
-        .admin-login-btn {
-            background: #1e293b; color: white; border: none; padding: 8px 18px;
-            border-radius: 20px; font-size: 13px; cursor: pointer; font-weight: bold;
-        }
-
-        /* Admin Section Styling */
-        #adminPanelSection {
-            display: none; background: white; max-width: 950px; margin: 30px auto;
-            padding: 20px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            border: 2px solid #2563eb; text-align: right;
-        }
-
-        .refresh-btn { background: #2563eb; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; }
-        
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: white; }
-        th, td { padding: 10px; border: 1px solid #cbd5e1; text-align: center; font-size: 14px; }
-        th { background: #0f172a; color: white; }
-        
-        .btn-approve { background: #16a34a; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        .btn-reject { background: #dc2626; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-right: 5px; }
-        .trx-badge { background: #fef3c7; color: #92400e; padding: 3px 6px; border-radius: 4px; font-weight: bold; font-family: monospace; }
     </style>
 </head>
-<body>
+<body class="pb-12">
 
-<div class="overlay">
-
-    <header>
-        <h1>شاندار آٹو لکی ڈرا مقابلے</h1>
-        <p>ٹارگٹ مکمل ہوتے ہی خودکار (Auto) لکی ونر کا اعلان!</p>
+    <!-- Header / Navbar -->
+    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-40 shadow-lg">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3 space-x-reverse">
+                <i class="fa-solid fa-trophy text-amber-400 text-2xl"></i>
+                <span class="font-bold text-xl tracking-wide text-amber-400">کوئز اینڈ ون پاکستان</span>
+            </div>
+            <!-- Wallet Display -->
+            <div class="flex items-center gap-3">
+                <div class="bg-slate-800 border border-amber-500/30 px-4 py-1.5 rounded-full flex items-center gap-2">
+                    <i class="fa-solid fa-wallet text-amber-400"></i>
+                    <span class="text-sm font-semibold">بیلنس:</span>
+                    <span id="user-balance" class="text-amber-400 font-bold text-lg">0</span>
+                    <span class="text-xs text-gray-400">PKR</span>
+                </div>
+                <button onclick="openModal('deposit-modal')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold px-4 py-1.5 rounded-full transition shadow-md">
+                    + رقم جمع کریں
+                </button>
+            </div>
+        </div>
     </header>
 
-    <div class="winner-section">
-        <h2>🎉 قرعہ اندازی لائیو ونرز (Target Status) 🎉</h2>
-        
-        <div class="live-notice">
-            📢 <b>اہم اطلاع:</b> تمام قرعہ اندازی ہمارے آفیشل یوٹیوب چینل پر لائیو دکھائی جائے گی! لائیو اسٹریم کے دوران اس ویب ایپ کو <b>اسکرین کاسٹنگ (Screencast)</b> کے ذریعے لائیو چلا کر 100% شفاف اور خودکار (Auto) طریقے سے ونر کا انتخاب کیا جائے گا۔<br>
-            ▶️ <a href="Https://youtube.com/@cornkingtv?si=AFJouq-QVrykxuXH" target="_blank" class="yt-link">ہمارا یوٹیوب چینل (Corn King TV) سبسکرائب اور لائیو وزٹ کریں</a>
-        </div>
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-10">
 
-        <div class="winner-grid">
-            <div class="winner-card">
-                <strong>iPhone 16 Pro</strong>
-                <div class="winner-number" id="iphoneWinner">ٹارگٹ جاری...</div>
+        <!-- Banner / Disclaimer Notice -->
+        <section class="bg-gradient-to-r from-amber-950/40 to-slate-900 border border-amber-500/20 rounded-2xl p-4 md:p-6 text-center shadow-inner">
+            <h1 class="text-xl md:text-2xl font-bold text-amber-400 mb-2">تعلیمی کوئز اور پروموشنل انعامی مقابلے</h1>
+            <p class="text-slate-300 text-sm max-w-3xl mx-auto leading-relaxed">
+                یہ ایک مکمل قانونی، سکل بیسڈ (Skill-Based) کوئز پلیٹ فارم ہے۔ صحیح جواب دیں اور پروموشنل انعامات جیتیں۔ 
+                کوئی جوا یا بلا اجازت لاٹری نہیں ہے۔ شفافیت ہماری بنیادی ترجیح ہے۔
+            </p>
+        </section>
+
+        <!-- Contests Grid -->
+        <section>
+            <h2 class="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
+                <i class="fa-solid fa-fire text-amber-500"></i> جاری پروموشنل مقابلے
+            </h2>
+            <div id="contests-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Contests will be dynamically rendered here -->
             </div>
-            <div class="winner-card">
-                <strong>ہیوی بائیک / موٹر سائیکل</strong>
-                <div class="winner-number" id="bikeWinner">ٹارگٹ جاری...</div>
+        </section>
+
+        <!-- Ledger & Transaction History (User View) -->
+        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-md">
+            <h3 class="text-lg font-bold text-slate-100 mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-list-check text-indigo-400"></i> آپ کے والٹ کا مکمل حساب کتاب (Transaction Ledger)
+            </h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm text-right text-slate-300">
+                    <thead class="text-xs uppercase bg-slate-800 text-slate-400">
+                        <tr>
+                            <th class="py-3 px-4">تاریخ و وقت</th>
+                            <th class="py-3 px-4">قسم</th>
+                            <th class="py-3 px-4">تفصیلات</th>
+                            <th class="py-3 px-4">رقم (PKR)</th>
+                            <th class="py-3 px-4">اسٹیٹس</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-ledger-body" class="divide-y divide-slate-800">
+                        <!-- User transactions will appear here -->
+                    </tbody>
+                </table>
             </div>
-            <div class="winner-card">
-                <strong>ڈاولینس فریج</strong>
-                <div class="winner-number" id="fridgeWinner">ٹارگٹ جاری...</div>
+        </section>
+
+        <!-- Admin Control Panel (Internal Simulation) -->
+        <section class="border-2 border-red-500/30 bg-slate-950 rounded-2xl p-6 shadow-2xl">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 border-b border-slate-800 pb-4">
+                <div>
+                    <span class="bg-red-500/20 text-red-400 text-xs font-bold px-2.5 py-1 rounded-full uppercase">ایڈمن کنٹرول سینٹر</span>
+                    <h3 class="text-xl font-bold text-slate-100 mt-1">مالیاتی کنٹرول اور والٹ اپروول پینل</h3>
+                </div>
+                <button onclick="exportToCSV()" class="bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/30 text-xs font-bold px-4 py-2 rounded-lg flex items-center gap-2">
+                    <i class="fa-solid fa-file-csv text-base"></i> مکمل یک جنبش ایکسل/CSV ڈاؤن لوڈ کریں
+                </button>
             </div>
-        </div>
-    </div>
 
-    <div class="container">
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=500" alt="iPhone 16 Pro">
-            <h3>iPhone 16 Pro</h3>
-            <p class="price">قیمت: 10 روپے</p>
-            <div class="target-info"><strong>قرعہ اندازی ٹارگٹ:</strong><br>10,000 اینٹریز کی تکمیل پر</div>
-            <a href="#payment" class="btn">اینٹری حاصل کریں</a>
-        </div>
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=500" alt="Motorcycle">
-            <h3>ہیوی بائیک / موٹر سائیکل</h3>
-            <p class="price">قیمت: 5 روپے</p>
-            <div class="target-info"><strong>قرعہ اندازی ٹارگٹ:</strong><br>6,000 اینٹریز کی تکمیل پر</div>
-            <a href="#payment" class="btn">اینٹری حاصل کریں</a>
-        </div>
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=500" alt="Refrigerator">
-            <h3>ڈاولینس فریج</h3>
-            <p class="price">قیمت: 1 روپیہ</p>
-            <div class="target-info"><strong>قرعہ اندازی ٹارگٹ:</strong><br>6,000 اینٹریز کی تکمیل پر</div>
-            <a href="#payment" class="btn">اینٹری حاصل کریں</a>
-        </div>
-    </div>
-
-    <div id="payment" class="payment-box">
-        <h2 style="color: #2c3e50; margin-top:0;">ادائیگی اور اینٹری کی تصدیق کا طریقہ</h2>
-        <p style="font-size: 16px;">1. درج ذیل <strong>JazzCash Merchant</strong> اکاؤنٹ پر مطلوبہ رقم بھیجیں:</p>
-        
-        <div>
-            <div class="jazzcash-badge">JazzCash (جائز کیش)</div><br>
-            <div class="jazzcash-number">
-                03037332556
-                <div class="account-title">نام: Muhammad Pervez</div>
+            <!-- Pending Deposits List -->
+            <div class="space-y-4">
+                <h4 class="text-sm font-semibold text-slate-400">غیر تصدیق شدہ جمع شدہ درخواستیں (Pending Deposits):</h4>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-right text-slate-300">
+                        <thead class="text-xs uppercase bg-slate-900 text-slate-400">
+                            <tr>
+                                <th class="py-2 px-3">یوزر ID</th>
+                                <th class="py-2 px-3">اکاؤنٹ نمبر/طریقہ</th>
+                                <th class="py-2 px-3">ٹرانزیکشن TID</th>
+                                <th class="py-2 px-3">رقم</th>
+                                <th class="py-2 px-3">ایکشن</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-pending-body" class="divide-y divide-slate-800">
+                            <!-- Pending admin approvals -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
+        </section>
+
+    </main>
+
+    <!-- Footer with Legal Links -->
+    <footer class="bg-slate-950 border-t border-slate-800 py-8 text-center text-xs text-slate-500">
+        <div class="max-w-6xl mx-auto px-4 space-y-4">
+            <div class="flex justify-center gap-6">
+                <button onclick="openModal('terms-modal')" class="hover:text-amber-400 transition">ٹرمز اینڈ کنڈیشنز (Terms of Service)</button>
+                <button onclick="openModal('privacy-modal')" class="hover:text-amber-400 transition">پرائیویسی پالیسی (Privacy Policy)</button>
+                <button onclick="openModal('disclaimer-modal')" class="hover:text-amber-400 transition">قانونی ڈسکلیمر (Legal Notice)</button>
+            </div>
+            <p>© 2026 Promotional Quiz Platform. All rights reserved. Registered under Educational & Promotional Skill-Contest guidelines.</p>
         </div>
-        
-        <p style="font-size: 16px;">2. پیسے بھیجنے کے بعد گوگل فارم میں تمام تفصیلات، TRX ID اور پیمنٹ کا اسکرین شاٹ جمع کروائیں:</p>
-
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScWzyc8rEwWcHi1ktMKsld0mWKrShGyvGfuSptq2-_rGREzPw/viewform?usp=sharing" target="_blank" class="form-btn">گوگل اینٹری فارم پُر کریں (فائل اپلوڈ کریں)</a>
-
-        <p style="font-size: 14px; color: #e65100; margin-top: 15px; font-weight: bold;">
-            ⚠️ نوٹ: فارم سبمٹ ہونے کے بعد ایڈمن کی طرف سے ادائیگی کی تصدیق کی جائے گی۔ منظوری (Approve) پر آپ کو ایک منفرد (Unique) ٹکٹ نمبر جاری کر دیا جائے گا۔
-        </p>
-    </div>
-
-    <!-- فوٹر اور پاسورڈ پروٹیکٹڈ ایڈمن لاگ ان -->
-    <footer>
-        <p>© 2026 جملہ حقوق محفوظ ہیں۔</p>
-        <button class="admin-login-btn" onclick="openAdminPanel()">🔐 ایڈمن پینل لاگ ان</button>
     </footer>
 
-    <!-- ایڈمن کنٹرول پینل (پاسورڈ کے بعد کھلے گا) -->
-    <div id="adminPanelSection">
-        <h2 style="color: #1e293b; text-align: center; margin-top:0;">🔐 ایڈمن تصدیقی پینل</h2>
-        <div style="text-align: center; margin-bottom: 15px;">
-            <button class="refresh-btn" onclick="loadPendingData()">🔄 تازه‌ ترین درخواستیں دیکھیں (Refresh)</button>
-        </div>
+    <!-- MODAL 1: Deposit Funds (Rotating Accounts) -->
+    <div id="deposit-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative">
+            <button onclick="closeModal('deposit-modal')" class="absolute top-4 left-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-lg font-bold text-amber-400 mb-4">والٹ میں رقم جمع کریں</h3>
+            
+            <p class="text-xs text-slate-400 mb-4">
+                براہ کرم درج ذیل خودکار فراہم کردہ اکاؤنٹ پر رقم بھیجیں اور نیچے TID فراہم کریں:
+            </p>
 
-        <div style="overflow-x: auto;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>نام</th>
-                        <th>فون نمبر</th>
-                        <th>پروڈکٹ / انعام</th>
-                        <th>TRX ID</th>
-                        <th>پیمنٹ تصویر</th>
-                        <th>ایکشن (Action)</th>
-                    </tr>
-                </thead>
-                <tbody id="requestTable">
-                    <tr><td colspan="6">ڈیٹا لوڈ کرنے کے لیے 'Refresh' کا بٹن دبائیں۔</td></tr>
-                </tbody>
-            </table>
+            <!-- Rotating Account Box -->
+            <div id="rotating-account-box" class="bg-slate-800 border border-amber-500/20 p-4 rounded-xl mb-4 text-center">
+                <!-- Account details inserted by JS -->
+            </div>
+
+            <form id="deposit-form" onsubmit="handleDepositSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">بھیجی گئی رقم (PKR)</label>
+                    <input type="number" id="deposit-amount" min="10" required class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400" placeholder="مثال: 100">
+                </div>
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">ٹرانزیکشن ID (TID / Trx ID)</label>
+                    <input type="text" id="deposit-tid" required class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400" placeholder="مثال: 8234910293">
+                </div>
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 rounded-lg transition text-sm">
+                    درخواست بھیجیں (Submit Deposit)
+                </button>
+            </form>
         </div>
     </div>
 
-</div>
+    <!-- MODAL 2: Quiz Verification Modal -->
+    <div id="quiz-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+        <div class="bg-slate-900 border border-amber-500/30 w-full max-w-md rounded-2xl p-6 relative">
+            <button onclick="closeModal('quiz-modal')" class="absolute top-4 left-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <span class="bg-amber-500/20 text-amber-400 text-xs font-bold px-2 py-0.5 rounded uppercase">قانونی اہلیت کی تصدیق</span>
+            <h3 class="text-lg font-bold text-white mt-2 mb-2">سکل بیسڈ کوئز ٹیسٹ</h3>
+            <p class="text-xs text-slate-400 mb-4">مقابلے میں شامل ہونے کے لیے اس آسان سوال کا صحیح جواب دیں:</p>
 
-<script>
-    // آپ کا سکرپٹ URL اور پاسورڈ
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxVwbyKtjG02xTTdSc561gAa6KRUyzZP5FsN84kSStBT5KkYrNIuumK1XDirMHYToQ0Mw/exec";
-    const ADMIN_PASSWORD = "RIZWAN671@";
+            <div class="bg-slate-800 p-4 rounded-xl mb-6">
+                <p id="quiz-question" class="text-sm font-semibold text-amber-300 mb-3"></p>
+                <div id="quiz-options" class="space-y-2">
+                    <!-- Options inserted by JS -->
+                </div>
+            </div>
+            <p class="text-[10px] text-slate-500 text-center">غلط جواب دینے کی صورت میں اینٹری کی رقم والٹ سے نہیں کاٹی جائے گی۔</p>
+        </div>
+    </div>
 
-    function checkTargetAndDraw(soldTickets, targetTickets, elementId, prefix) {
-        if (soldTickets >= targetTickets) {
-            let winningTicket = Math.floor(Math.random() * targetTickets) + 1;
-            document.getElementById(elementId).innerText = "جیتنے والا ٹکٹ: #" + prefix + "-" + winningTicket;
-        } else {
-            document.getElementById(elementId).innerText = soldTickets + " / " + targetTickets + " مکمل";
+    <!-- MODAL 3: Terms of Service -->
+    <div id="terms-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-2xl p-6 relative">
+            <button onclick="closeModal('terms-modal')" class="absolute top-4 left-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-lg font-bold text-amber-400 mb-4">ٹرمز اینڈ کنڈیشنز (Terms & Conditions)</h3>
+            <div class="text-xs text-slate-300 space-y-3 leading-relaxed">
+                <p>1. **اهلیت:** اس پلیٹ فارم پر صرف 18 سال یا اس سے زائد عمر کے افراد حصہ لے سکتے ہیں۔</p>
+                <p>2. **کوئز لازمی ہے:** یہ کوئی لاٹری یا شفلنگ گیم نہیں ہے۔ ہر صارف کا مقابلے میں شامل ہونا تعلیمی یا علمی سوال کا صحیح جواب دینے کے مشروط ہے۔</p>
+                <p>3. **غیر قابل واپسی والٹ بیلنس:** والٹ میں جمع کروائی گئی رقم صرف سکل مقابلے کے کوپنز خریدنے کے لیے استعمال ہو سکتی ہے۔</p>
+                <p>4. **شفاف قرعہ اندازی:** تمام ڈراز کمپیوٹرائزڈ سسٹم کے ذریعے ہوتے ہیں اور ٹارگٹ اینٹریز مکمل ہونے پر آن لائن دکھائے جاتے ہیں۔</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 4: Privacy Policy -->
+    <div id="privacy-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-2xl p-6 relative">
+            <button onclick="closeModal('privacy-modal')" class="absolute top-4 left-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-lg font-bold text-amber-400 mb-4">پرائیویسی پالیسی (Privacy Policy)</h3>
+            <div class="text-xs text-slate-300 space-y-3 leading-relaxed">
+                <p>آپ کے تمام ٹرانزیکشنل لاگز، موبائل نمبرز اور معلومات مکمل طور پر محفوظ رکھی جاتی ہیں۔ ہم آپ کا ڈیٹا کسی تھرڈ پارٹی کو فروخت نہیں کرتے۔ ڈیٹا کا استعمال صرف انعامات کی ترسیل کے لیے کیا جاتا ہے۔</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 5: Legal Disclaimer -->
+    <div id="disclaimer-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-2xl p-6 relative">
+            <button onclick="closeModal('disclaimer-modal')" class="absolute top-4 left-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-lg font-bold text-amber-400 mb-4">قانونی ڈسکلیمر (Legal Notice)</h3>
+            <div class="text-xs text-slate-300 space-y-3 leading-relaxed">
+                <p>یہ ویب سائٹ پاکستان پینل کوڈ اور مروجہ اینٹی گیمبلنگ ایکٹ کے عین مطابق کام کرتی ہے۔ چونکہ ہر اینٹری سے قبل صارف کی علمی اہلیت کا امتحان (Skill-based Quiz) لیا جاتا ہے، اس لیے اس سرگرمی کو قمار بازی یا جوا تصور نہیں کیا جا سکتا۔</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Global Application State (Zero Data Loss Architecture)
+        const state = {
+            userBalance: 0,
+            activeContestId: null,
+            // 5 Rotating Payment Accounts
+            accounts: [
+                { type: "JazzCash", title: "محمد رضوان", number: "03001234567" },
+                { type: "EasyPaisa", title: "علی احمد", number: "03459876543" },
+                { type: "Raast ID", title: "خان ٹریڈرز", number: "03125554433" },
+                { type: "Meezan Bank", title: "رضوان انٹرپرائزز", number: "02010108928374" },
+                { type: "JazzCash (Secondary)", title: "شاہ بانو", number: "03051112233" }
+            ],
+            // 4 Fixed Prize Contests with Math Protections
+            contests: [
+                { id: "c1", title: "الیکٹرک / گیس ہیٹر", fee: 2, icon: "fa-fire-burner", target: 3500, current: 1240, color: "text-orange-400" },
+                { id: "c2", title: "ڈیپ فریزر / فریج", fee: 5, icon: "fa-snowflake", target: 20000, current: 8430, color: "text-blue-400" },
+                { id: "c3", title: "70cc موٹر سائیکل", fee: 5, icon: "fa-motorcycle", target: 25000, current: 14200, color: "text-emerald-400" },
+                { id: "c4", title: "آئی فون 15 / 16 Pro", fee: 10, icon: "fa-mobile-screen-button", target: 35000, current: 21900, color: "text-purple-400" }
+            ],
+            // Ledger Ledger Records
+            ledger: [],
+            pendingDeposits: []
+        };
+
+        // Skill-based Quiz Repository
+        const quizBank = [
+            { q: "پاکستان کا دارالحکومت کون سا ہے؟", options: ["لاہور", "اسلام آباد", "کراچی"], correct: 1 },
+            { q: "پاکستان کی قومی زبان کون سی ہے؟", options: ["اردو", "انگلش", "پنجابی"], correct: 0 },
+            { q: "کمپیوٹر کا دماغ کسے کہا جاتا ہے؟", options: ["RAM", "CPU", "Hard Drive"], correct: 1 },
+            { q: "10 میں 5 جمع کرنے سے کیا حاصل ہوگا؟", options: ["12", "15", "20"], correct: 1 }
+        ];
+
+        // App Initialization
+        document.addEventListener("DOMContentLoaded", () => {
+            renderContests();
+            renderLedger();
+            renderAdminPanel();
+            rotateDepositAccount();
+        });
+
+        // Render Contests
+        function renderContests() {
+            const container = document.getElementById('contests-container');
+            container.innerHTML = state.contests.map(c => {
+                const percent = Math.floor((c.current / c.target) * 100);
+                return `
+                    <div class="bg-slate-900 border border-slate-800 hover:border-amber-500/40 rounded-2xl p-5 shadow-xl transition flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <i class="fa-solid ${c.icon} ${c.color} text-3xl"></i>
+                                <span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-bold px-3 py-1 rounded-full">
+                                    فیس: ${c.fee} PKR
+                                </span>
+                            </div>
+                            <h3 class="font-bold text-lg text-slate-100 mb-2">${c.title}</h3>
+                            <div class="space-y-1 mb-4">
+                                <div class="flex justify-between text-xs text-slate-400">
+                                    <span>اینٹریز پروگریس</span>
+                                    <span>${c.current} / ${c.target} (${percent}%)</span>
+                                </div>
+                                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-amber-500 h-full transition-all duration-500" style="width: ${percent}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="startContestEntry('${c.id}')" class="w-full bg-slate-800 hover:bg-amber-500 hover:text-slate-950 border border-slate-700 text-amber-400 font-bold py-2 rounded-xl transition text-sm flex justify-center items-center gap-2">
+                            <i class="fa-solid fa-ticket"></i> مقابلے میں حصہ لیں
+                        </button>
+                    </div>
+                `;
+            }).join('');
         }
-    }
 
-    window.onload = function() {
-        checkTargetAndDraw(0, 10000, "iphoneWinner", "IPH");
-        checkTargetAndDraw(0, 6000, "bikeWinner", "BIK");
-        checkTargetAndDraw(0, 6000, "fridgeWinner", "FRG");
-    };
-
-    // پاسورڈ چیک کرنے کا طریقہ
-    function openAdminPanel() {
-        let pwd = prompt("ایڈمن پینل کھولنے کے لیے پاسورڈ درج کریں:");
-        if (pwd === ADMIN_PASSWORD) {
-            document.getElementById('adminPanelSection').style.display = 'block';
-            window.scrollTo({ top: document.getElementById('adminPanelSection').offsetTop, behavior: 'smooth' });
-            loadPendingData();
-        } else if (pwd !== null) {
-            alert("❌ غلط پاسورڈ! آپ کو ایڈمن پینل تک رسائی حاصل نہیں ہے۔");
+        // Handle Entry Attempt
+        function startContestEntry(contestId) {
+            const contest = state.contests.find(c => c.id === contestId);
+            if (state.userBalance < contest.fee) {
+                alert(`آپ کا بیلنس کم ہے۔ اس مقابلے کے لیے ${contest.fee} PKR درکار ہیں۔ براہ کرم پہلے والٹ ریچارج کریں۔`);
+                openModal('deposit-modal');
+                return;
+            }
+            state.activeContestId = contestId;
+            openQuizModal();
         }
-    }
 
-    // ایڈمن ڈیٹا لوڈ کرنا
-    function loadPendingData() {
-        document.getElementById("requestTable").innerHTML = "<tr><td colspan='6'>تازہ ترین ڈیٹا چیک کیا جا رہا ہے...</td></tr>";
-        fetch(SCRIPT_URL + "?action=getPending")
-            .then(res => res.json())
-            .then(data => {
-                let html = "";
-                if(!data || data.length === 0) {
-                    html = "<tr><td colspan='6' style='color:#16a34a; font-weight:bold;'>کوئی نئی پینڈنگ درخواست نہیں ہے!</td></tr>";
-                } else {
-                    data.forEach(item => {
-                        html += `
-                            <tr>
-                                <td><b>${item.name || '-'}</b></td>
-                                <td>${item.phone || '-'}</td>
-                                <td>${item.product || '-'}</td>
-                                <td><span class="trx-badge">${item.trx || '-'}</span></td>
-                                <td>${item.imageUrl ? `<a href="${item.imageUrl}" target="_blank" style="color:#2563eb; font-weight:bold;">🖼️ تصویر دیکھیں</a>` : 'تصویر نہیں ہے'}</td>
-                                <td>
-                                    <button class="btn-approve" onclick="approveUser(${item.row})">Approve ✅</button>
-                                    <button class="btn-reject" onclick="rejectUser(${item.row})">Reject ❌</button>
-                                </td>
-                            </tr>
-                        `;
-                    });
-                }
-                document.getElementById("requestTable").innerHTML = html;
-            })
-            .catch(err => {
-                document.getElementById("requestTable").innerHTML = "<tr><td colspan='6' style='color:red;'>ڈیٹا لوڈ کرنے میں مسئلہ آیا!</td></tr>";
-            });
-    }
+        // Quiz Logic
+        function openQuizModal() {
+            const quiz = quizBank[Math.floor(Math.random() * quizBank.length)];
+            document.getElementById('quiz-question').innerText = quiz.q;
+            
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = quiz.options.map((opt, idx) => `
+                <button onclick="validateQuizAnswer(${idx}, ${quiz.correct})" class="w-full bg-slate-900 hover:bg-amber-500/20 border border-slate-700 text-right px-4 py-2.5 rounded-lg text-xs text-slate-200 transition flex justify-between items-center">
+                    <span>${opt}</span>
+                    <i class="fa-regular fa-circle text-slate-500"></i>
+                </button>
+            `).join('');
 
-    // اپروو کرنا
-    function approveUser(row) {
-        if(confirm("کیا آپ اس ادائیگی کی تصدیق کر کے نئی منفرد (Unique) ٹکٹ آئی ڈی جاری کرنا چاہتے ہیں؟")) {
-            fetch(SCRIPT_URL + `?action=approve&row=${row}`)
-                .then(res => res.json())
-                .then(res => {
-                    alert("✅ منظوری مکمل!\nنیا منفرد ٹکٹ نمبر جاری کر دیا گیا: " + res.ticketNo);
-                    loadPendingData();
-                });
+            openModal('quiz-modal');
         }
-    }
 
-    // ریجیکٹ کرنا
-    function rejectUser(row) {
-        if(confirm("کیا آپ اس درخواست کو منسوخ (Reject) کرنا چاہتے ہیں؟")) {
-            fetch(SCRIPT_URL + `?action=reject&row=${row}`)
-                .then(res => res.json())
-                .then(res => {
-                    alert("❌ درخواست رد کر دی گئی ہے!");
-                    loadPendingData();
-                });
-        }
-    }
-</script>
-
-</body>
-</html>
+        function validateQuizAnswer(selectedIndex, correctIndex) {
+            closeModal('quiz-modal');
+            if (selectedIndex === correctIndex) {
+                const contest = state.contests.find
