@@ -1,121 +1,138 @@
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پروموشنل کوئز اینڈ ون - شفاف والٹ و مقابلے</title>
+    <title>Quiz & Win Pakistan - Promotional Skill Contests</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&family=Jameel+Noori+Nastaleeq&family=Poppins:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
         body {
-            font-family: 'Poppins', 'Noto Nastaliq Urdu', sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
+            font-family: 'Poppins', sans-serif;
+            background-color: #0b0f19;
+            color: #f1f5f9;
         }
-        .modal {
-            transition: opacity 0.25s ease;
+        .urdu-font {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            direction: rtl;
         }
     </style>
 </head>
-<body class="pb-12">
+<body class="pb-12 selection:bg-amber-500 selection:text-slate-950">
 
     <!-- Header / Navbar -->
-    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-40 shadow-lg">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-3 space-x-reverse">
-                <i class="fa-solid fa-trophy text-amber-400 text-2xl"></i>
-                <span class="font-bold text-xl tracking-wide text-amber-400">کوئز اینڈ ون پاکستان</span>
-            </div>
-            <!-- Wallet Display -->
+    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-40 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="bg-slate-800 border border-amber-500/30 px-4 py-1.5 rounded-full flex items-center gap-2">
-                    <i class="fa-solid fa-wallet text-amber-400"></i>
-                    <span class="text-sm font-semibold">بیلنس:</span>
-                    <span id="user-balance" class="text-amber-400 font-bold text-lg">0</span>
-                    <span class="text-xs text-gray-400">PKR</span>
+                <div class="bg-amber-500/10 p-2 rounded-xl border border-amber-500/30">
+                    <i class="fa-solid fa-trophy text-amber-400 text-xl"></i>
                 </div>
-                <button onclick="openModal('deposit-modal')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold px-4 py-1.5 rounded-full transition shadow-md">
-                    + رقم جمع کریں
+                <div>
+                    <span class="font-bold text-lg md:text-xl tracking-wide text-white block leading-none">Quiz & Win</span>
+                    <span class="text-[10px] text-amber-400 font-semibold tracking-wider uppercase">Promotional Platform</span>
+                </div>
+            </div>
+
+            <!-- Wallet Balance Control -->
+            <div class="flex items-center gap-3">
+                <div class="bg-slate-950 border border-amber-500/30 px-4 py-1.5 rounded-full flex items-center gap-2 shadow-inner">
+                    <i class="fa-solid fa-wallet text-amber-400 text-sm"></i>
+                    <span class="text-xs text-slate-400 font-medium hidden sm:inline">Balance:</span>
+                    <span id="user-balance" class="text-amber-400 font-bold text-base">0</span>
+                    <span class="text-[10px] text-slate-400 font-bold">PKR</span>
+                </div>
+                <button onclick="openModal('deposit-modal')" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs md:text-sm font-bold px-4 py-2 rounded-full transition shadow-lg shadow-emerald-900/20 active:scale-95">
+                    + Add Funds
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="max-w-6xl mx-auto px-4 py-8 space-y-10">
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 py-8 space-y-10">
 
-        <!-- Banner / Disclaimer Notice -->
-        <section class="bg-gradient-to-r from-amber-950/40 to-slate-900 border border-amber-500/20 rounded-2xl p-4 md:p-6 text-center shadow-inner">
-            <h1 class="text-xl md:text-2xl font-bold text-amber-400 mb-2">تعلیمی کوئز اور پروموشنل انعامی مقابلے</h1>
-            <p class="text-slate-300 text-sm max-w-3xl mx-auto leading-relaxed">
-                یہ ایک مکمل قانونی، سکل بیسڈ (Skill-Based) کوئز پلیٹ فارم ہے۔ صحیح جواب دیں اور پروموشنل انعامات جیتیں۔ 
-                کوئی جوا یا بلا اجازت لاٹری نہیں ہے۔ شفافیت ہماری بنیادی ترجیح ہے۔
-            </p>
-        </section>
-
-        <!-- Contests Grid -->
-        <section>
-            <h2 class="text-xl font-bold text-slate-100 mb-6 flex items-center gap-2">
-                <i class="fa-solid fa-fire text-amber-500"></i> جاری پروموشنل مقابلے
-            </h2>
-            <div id="contests-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Contests will be dynamically rendered here -->
+        <!-- Legal Cover Banner -->
+        <section class="bg-gradient-to-r from-slate-900 via-amber-950/20 to-slate-900 border border-amber-500/20 rounded-2xl p-5 md:p-6 shadow-2xl relative overflow-hidden">
+            <div class="max-w-3xl space-y-2">
+                <span class="bg-amber-500/10 text-amber-400 border border-amber-500/30 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">100% Legal & Skill-Based</span>
+                <h1 class="text-xl md:text-2xl font-bold text-white">Answer Easy Questions & Win Big Rewards!</h1>
+                <p class="text-slate-300 text-xs md:text-sm leading-relaxed">
+                    Participate in promotional skill giveaways starting from just <span class="text-amber-400 font-bold">Rs. 2, Rs. 5 & Rs. 10</span>. 
+                    Every entry requires solving a basic quiz question to comply with skill contest regulations.
+                </p>
             </div>
         </section>
 
-        <!-- Ledger & Transaction History (User View) -->
-        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-md">
-            <h3 class="text-lg font-bold text-slate-100 mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-list-check text-indigo-400"></i> آپ کے والٹ کا مکمل حساب کتاب (Transaction Ledger)
-            </h3>
+        <!-- Product Contests Grid -->
+        <section>
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-lg md:text-xl font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-fire text-amber-500"></i> Active Giveaways
+                </h2>
+                <span class="text-xs text-slate-400">Target-based Automated Draws</span>
+            </div>
+
+            <div id="contests-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Products dynamically rendered here -->
+            </div>
+        </section>
+
+        <!-- User Wallet Transaction Ledger -->
+        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5 md:p-6 shadow-xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-base md:text-lg font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-receipt text-indigo-400"></i> My Wallet Ledger & History
+                </h3>
+                <span class="text-[11px] text-slate-400">100% Transparent Record</span>
+            </div>
             <div class="overflow-x-auto">
-                <table class="w-full text-sm text-right text-slate-300">
-                    <thead class="text-xs uppercase bg-slate-800 text-slate-400">
+                <table class="w-full text-left text-xs text-slate-300">
+                    <thead class="text-[10px] uppercase bg-slate-950 text-slate-400 border-b border-slate-800">
                         <tr>
-                            <th class="py-3 px-4">تاریخ و وقت</th>
-                            <th class="py-3 px-4">قسم</th>
-                            <th class="py-3 px-4">تفصیلات</th>
-                            <th class="py-3 px-4">رقم (PKR)</th>
-                            <th class="py-3 px-4">اسٹیٹس</th>
+                            <th class="py-3 px-4">Date & Time</th>
+                            <th class="py-3 px-4">Type</th>
+                            <th class="py-3 px-4">Description</th>
+                            <th class="py-3 px-4">Amount</th>
+                            <th class="py-3 px-4">Status</th>
                         </tr>
                     </thead>
-                    <tbody id="user-ledger-body" class="divide-y divide-slate-800">
-                        <!-- User transactions will appear here -->
+                    <tbody id="user-ledger-body" class="divide-y divide-slate-800/60">
+                        <!-- User transactions will render here -->
                     </tbody>
                 </table>
             </div>
         </section>
 
-        <!-- Admin Control Panel (Internal Simulation) -->
-        <section class="border-2 border-red-500/30 bg-slate-950 rounded-2xl p-6 shadow-2xl">
+        <!-- Admin Control Panel (Internal Verification & CSV Export) -->
+        <section class="border border-red-500/30 bg-slate-950 rounded-2xl p-5 md:p-6 shadow-2xl relative">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 border-b border-slate-800 pb-4">
                 <div>
-                    <span class="bg-red-500/20 text-red-400 text-xs font-bold px-2.5 py-1 rounded-full uppercase">ایڈمن کنٹرول سینٹر</span>
-                    <h3 class="text-xl font-bold text-slate-100 mt-1">مالیاتی کنٹرول اور والٹ اپروول پینل</h3>
+                    <span class="bg-red-500/20 text-red-400 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">Admin Control Panel</span>
+                    <h3 class="text-lg font-bold text-white mt-1">Manual Deposit Approvals & Financial Ledger</h3>
                 </div>
-                <button onclick="exportToCSV()" class="bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-500/30 text-xs font-bold px-4 py-2 rounded-lg flex items-center gap-2">
-                    <i class="fa-solid fa-file-csv text-base"></i> مکمل یک جنبش ایکسل/CSV ڈاؤن لوڈ کریں
+                <button onclick="exportToCSV()" class="bg-slate-900 hover:bg-slate-800 text-amber-400 border border-amber-500/30 text-xs font-bold px-4 py-2 rounded-xl transition flex items-center gap-2 shadow-md">
+                    <i class="fa-solid fa-file-csv text-base"></i> Export Full Ledger (CSV)
                 </button>
             </div>
 
-            <!-- Pending Deposits List -->
-            <div class="space-y-4">
-                <h4 class="text-sm font-semibold text-slate-400">غیر تصدیق شدہ جمع شدہ درخواستیں (Pending Deposits):</h4>
+            <!-- Pending Deposits Queue -->
+            <div class="space-y-3">
+                <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Pending User Deposits (Manual Approval):</h4>
                 <div class="overflow-x-auto">
-                    <table class="w-full text-sm text-right text-slate-300">
-                        <thead class="text-xs uppercase bg-slate-900 text-slate-400">
+                    <table class="w-full text-left text-xs text-slate-300">
+                        <thead class="text-[10px] uppercase bg-slate-900 text-slate-400 border-b border-slate-800">
                             <tr>
-                                <th class="py-2 px-3">یوزر ID</th>
-                                <th class="py-2 px-3">اکاؤنٹ نمبر/طریقہ</th>
-                                <th class="py-2 px-3">ٹرانزیکشن TID</th>
-                                <th class="py-2 px-3">رقم</th>
-                                <th class="py-2 px-3">ایکشن</th>
+                                <th class="py-2.5 px-3">User ID</th>
+                                <th class="py-2.5 px-3">TRX ID (TID)</th>
+                                <th class="py-2.5 px-3">Amount</th>
+                                <th class="py-2.5 px-3">Time</th>
+                                <th class="py-2.5 px-3">Action</th>
                             </tr>
                         </thead>
                         <tbody id="admin-pending-body" class="divide-y divide-slate-800">
-                            <!-- Pending admin approvals -->
+                            <!-- Pending Approvals Rendered Here -->
                         </tbody>
                     </table>
                 </div>
@@ -124,145 +141,169 @@
 
     </main>
 
-    <!-- Footer with Legal Links -->
+    <!-- Footer with Legal Modals -->
     <footer class="bg-slate-950 border-t border-slate-800 py-8 text-center text-xs text-slate-500">
-        <div class="max-w-6xl mx-auto px-4 space-y-4">
-            <div class="flex justify-center gap-6">
-                <button onclick="openModal('terms-modal')" class="hover:text-amber-400 transition">ٹرمز اینڈ کنڈیشنز (Terms of Service)</button>
-                <button onclick="openModal('privacy-modal')" class="hover:text-amber-400 transition">پرائیویسی پالیسی (Privacy Policy)</button>
-                <button onclick="openModal('disclaimer-modal')" class="hover:text-amber-400 transition">قانونی ڈسکلیمر (Legal Notice)</button>
+        <div class="max-w-7xl mx-auto px-4 space-y-4">
+            <div class="flex justify-center gap-6 flex-wrap">
+                <button onclick="openModal('terms-modal')" class="hover:text-amber-400 transition">Terms of Service</button>
+                <button onclick="openModal('privacy-modal')" class="hover:text-amber-400 transition">Privacy Policy</button>
+                <button onclick="openModal('disclaimer-modal')" class="hover:text-amber-400 transition">Legal Disclaimer (Urdu)</button>
             </div>
-            <p>© 2026 Promotional Quiz Platform. All rights reserved. Registered under Educational & Promotional Skill-Contest guidelines.</p>
+            <p>© 2026 Quiz & Win Pakistan. All rights reserved. Skill-based contest rules apply.</p>
         </div>
     </footer>
 
-    <!-- MODAL 1: Deposit Funds (Rotating Accounts) -->
-    <div id="deposit-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden">
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative">
-            <button onclick="closeModal('deposit-modal')" class="absolute top-4 left-4 text-slate-400 hover:text-white">
-                <i class="fa-solid fa-xmark text-xl"></i>
+    <!-- MODAL 1: Deposit Funds (Dynamic Rotating Accounts) -->
+    <div id="deposit-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative shadow-2xl">
+            <button onclick="closeModal('deposit-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
             </button>
-            <h3 class="text-lg font-bold text-amber-400 mb-4">والٹ میں رقم جمع کریں</h3>
-            
-            <p class="text-xs text-slate-400 mb-4">
-                براہ کرم درج ذیل خودکار فراہم کردہ اکاؤنٹ پر رقم بھیجیں اور نیچے TID فراہم کریں:
-            </p>
+            <h3 class="text-lg font-bold text-amber-400 mb-1">Add Wallet Balance</h3>
+            <p class="text-xs text-slate-400 mb-4">Send payment to the generated account below and submit TID:</p>
 
-            <!-- Rotating Account Box -->
-            <div id="rotating-account-box" class="bg-slate-800 border border-amber-500/20 p-4 rounded-xl mb-4 text-center">
-                <!-- Account details inserted by JS -->
+            <!-- Dynamic Rotating Account Display -->
+            <div id="rotating-account-box" class="bg-slate-950 border border-amber-500/30 p-4 rounded-xl mb-4 text-center">
+                <!-- Javascript will inject dynamic rotating account details here -->
             </div>
 
             <form id="deposit-form" onsubmit="handleDepositSubmit(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs text-slate-400 mb-1">بھیجی گئی رقم (PKR)</label>
-                    <input type="number" id="deposit-amount" min="10" required class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400" placeholder="مثال: 100">
+                    <label class="block text-xs text-slate-400 mb-1">Sent Amount (PKR)</label>
+                    <input type="number" id="deposit-amount" min="10" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400" placeholder="e.g. 100">
                 </div>
                 <div>
-                    <label class="block text-xs text-slate-400 mb-1">ٹرانزیکشن ID (TID / Trx ID)</label>
-                    <input type="text" id="deposit-tid" required class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400" placeholder="مثال: 8234910293">
+                    <label class="block text-xs text-slate-400 mb-1">Transaction ID (TID / Trx ID)</label>
+                    <input type="text" id="deposit-tid" required class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400" placeholder="e.g. 9823410293">
                 </div>
-                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 rounded-lg transition text-sm">
-                    درخواست بھیجیں (Submit Deposit)
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-2.5 rounded-xl transition text-sm shadow-lg shadow-amber-500/10">
+                    Submit Deposit Request
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- MODAL 2: Quiz Verification Modal -->
-    <div id="quiz-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden">
-        <div class="bg-slate-900 border border-amber-500/30 w-full max-w-md rounded-2xl p-6 relative">
-            <button onclick="closeModal('quiz-modal')" class="absolute top-4 left-4 text-slate-400 hover:text-white">
-                <i class="fa-solid fa-xmark text-xl"></i>
+    <!-- MODAL 2: Skill Quiz Modal -->
+    <div id="quiz-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
+        <div class="bg-slate-900 border border-amber-500/30 w-full max-w-md rounded-2xl p-6 relative shadow-2xl">
+            <button onclick="closeModal('quiz-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
             </button>
-            <span class="bg-amber-500/20 text-amber-400 text-xs font-bold px-2 py-0.5 rounded uppercase">قانونی اہلیت کی تصدیق</span>
-            <h3 class="text-lg font-bold text-white mt-2 mb-2">سکل بیسڈ کوئز ٹیسٹ</h3>
-            <p class="text-xs text-slate-400 mb-4">مقابلے میں شامل ہونے کے لیے اس آسان سوال کا صحیح جواب دیں:</p>
+            <span class="bg-amber-500/10 text-amber-400 border border-amber-500/30 text-[10px] font-bold px-2 py-0.5 rounded uppercase">Skill Test Required</span>
+            <h3 class="text-base font-bold text-white mt-2 mb-1">Answer to Enter Giveaway</h3>
+            <p class="text-xs text-slate-400 mb-4">Solve this simple question to confirm your entry:</p>
 
-            <div class="bg-slate-800 p-4 rounded-xl mb-6">
+            <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl mb-4">
                 <p id="quiz-question" class="text-sm font-semibold text-amber-300 mb-3"></p>
                 <div id="quiz-options" class="space-y-2">
                     <!-- Options inserted by JS -->
                 </div>
             </div>
-            <p class="text-[10px] text-slate-500 text-center">غلط جواب دینے کی صورت میں اینٹری کی رقم والٹ سے نہیں کاٹی جائے گی۔</p>
+            <p class="text-[10px] text-slate-500 text-center">If you answer incorrectly, no amount will be deducted from your wallet.</p>
         </div>
     </div>
 
     <!-- MODAL 3: Terms of Service -->
-    <div id="terms-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+    <div id="terms-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-2xl p-6 relative">
-            <button onclick="closeModal('terms-modal')" class="absolute top-4 left-4 text-slate-400 hover:text-white">
-                <i class="fa-solid fa-xmark text-xl"></i>
+            <button onclick="closeModal('terms-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
             </button>
-            <h3 class="text-lg font-bold text-amber-400 mb-4">ٹرمز اینڈ کنڈیشنز (Terms & Conditions)</h3>
+            <h3 class="text-lg font-bold text-amber-400 mb-3">Terms of Service</h3>
             <div class="text-xs text-slate-300 space-y-3 leading-relaxed">
-                <p>1. **اهلیت:** اس پلیٹ فارم پر صرف 18 سال یا اس سے زائد عمر کے افراد حصہ لے سکتے ہیں۔</p>
-                <p>2. **کوئز لازمی ہے:** یہ کوئی لاٹری یا شفلنگ گیم نہیں ہے۔ ہر صارف کا مقابلے میں شامل ہونا تعلیمی یا علمی سوال کا صحیح جواب دینے کے مشروط ہے۔</p>
-                <p>3. **غیر قابل واپسی والٹ بیلنس:** والٹ میں جمع کروائی گئی رقم صرف سکل مقابلے کے کوپنز خریدنے کے لیے استعمال ہو سکتی ہے۔</p>
-                <p>4. **شفاف قرعہ اندازی:** تمام ڈراز کمپیوٹرائزڈ سسٹم کے ذریعے ہوتے ہیں اور ٹارگٹ اینٹریز مکمل ہونے پر آن لائن دکھائے جاتے ہیں۔</p>
+                <p>1. <strong>Eligibility:</strong> Users must be at least 18 years old to register and participate.</p>
+                <p>2. <strong>Skill Contest Mandate:</strong> This is an educational skill-based promotional contest platform. Entry is strictly conditional upon correctly answering a quiz question.</p>
+                <p>3. <strong>Wallet Rules:</strong> Deposited funds are used to purchase entry tickets for skill contests and cannot be refunded once used.</p>
+                <p>4. <strong>Automated Selection:</strong> Winners are selected randomly via computerized script once the target number of entries is 100% reached.</p>
             </div>
         </div>
     </div>
 
     <!-- MODAL 4: Privacy Policy -->
-    <div id="privacy-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+    <div id="privacy-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-2xl p-6 relative">
-            <button onclick="closeModal('privacy-modal')" class="absolute top-4 left-4 text-slate-400 hover:text-white">
-                <i class="fa-solid fa-xmark text-xl"></i>
+            <button onclick="closeModal('privacy-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
             </button>
-            <h3 class="text-lg font-bold text-amber-400 mb-4">پرائیویسی پالیسی (Privacy Policy)</h3>
+            <h3 class="text-lg font-bold text-amber-400 mb-3">Privacy Policy</h3>
             <div class="text-xs text-slate-300 space-y-3 leading-relaxed">
-                <p>آپ کے تمام ٹرانزیکشنل لاگز، موبائل نمبرز اور معلومات مکمل طور پر محفوظ رکھی جاتی ہیں۔ ہم آپ کا ڈیٹا کسی تھرڈ پارٹی کو فروخت نہیں کرتے۔ ڈیٹا کا استعمال صرف انعامات کی ترسیل کے لیے کیا جاتا ہے۔</p>
+                <p>Your phone numbers, payment records, and transaction IDs are kept strictly encrypted. We do not share or sell user data to third parties. Data is only utilized for balance verification and prize delivery.</p>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 5: Legal Disclaimer -->
-    <div id="disclaimer-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+    <!-- MODAL 5: Legal Disclaimer (Urdu Legal Shield) -->
+    <div id="disclaimer-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-2xl p-6 relative">
-            <button onclick="closeModal('disclaimer-modal')" class="absolute top-4 left-4 text-slate-400 hover:text-white">
-                <i class="fa-solid fa-xmark text-xl"></i>
+            <button onclick="closeModal('disclaimer-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
             </button>
-            <h3 class="text-lg font-bold text-amber-400 mb-4">قانونی ڈسکلیمر (Legal Notice)</h3>
-            <div class="text-xs text-slate-300 space-y-3 leading-relaxed">
-                <p>یہ ویب سائٹ پاکستان پینل کوڈ اور مروجہ اینٹی گیمبلنگ ایکٹ کے عین مطابق کام کرتی ہے۔ چونکہ ہر اینٹری سے قبل صارف کی علمی اہلیت کا امتحان (Skill-based Quiz) لیا جاتا ہے، اس لیے اس سرگرمی کو قمار بازی یا جوا تصور نہیں کیا جا سکتا۔</p>
+            <h3 class="text-lg font-bold text-amber-400 mb-3">قانونی وضاحت (Legal Shield Notice)</h3>
+            <div class="text-xs text-slate-300 space-y-3 leading-relaxed urdu-font">
+                <p>یہ ویب سائٹ اور ایپ پاکستان کے تمام مروجہ قوانین کے عین مطابق بطور پروموشنل کوئز مقابلے کام کرتی ہے۔ کسی بھی مقابلے میں شامل ہونے کے لیے صارف کی علمی قابلیت (Skill-based Quiz) کا امتحان لازمی ہے، اسی لیے اسے پاکستان پینل کوڈ کے تحت لاٹری یا جوا تصور نہیں کیا جا سکتا۔</p>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript Logic -->
+    <!-- JavaScript Logic Engine -->
     <script>
-        // Global Application State (Zero Data Loss Architecture)
+        // State Management
         const state = {
             userBalance: 0,
             activeContestId: null,
-            // 5 Rotating Payment Accounts
+            // 5 Rotating Local Accounts to avoid AML flags
             accounts: [
-                { type: "JazzCash", title: "محمد رضوان", number: "03001234567" },
-                { type: "EasyPaisa", title: "علی احمد", number: "03459876543" },
-                { type: "Raast ID", title: "خان ٹریڈرز", number: "03125554433" },
-                { type: "Meezan Bank", title: "رضوان انٹرپرائزز", number: "02010108928374" },
-                { type: "JazzCash (Secondary)", title: "شاہ بانو", number: "03051112233" }
+                { type: "JazzCash", title: "Muhammad Rizwan", number: "03001234567" },
+                { type: "EasyPaisa", title: "Ali Ahmad", number: "03459876543" },
+                { type: "Raast ID", title: "Khan Traders", number: "03125554433" },
+                { type: "Meezan Bank", title: "Rizwan Enterprises", number: "02010108928374" },
+                { type: "JazzCash Option 2", title: "Shah Bano", number: "03051112233" }
             ],
-            // 4 Fixed Prize Contests with Math Protections
+            // 4 Fixed Products with your specified fees (Rs 2, Rs 5, Rs 10) & Images
             contests: [
-                { id: "c1", title: "الیکٹرک / گیس ہیٹر", fee: 2, icon: "fa-fire-burner", target: 3500, current: 1240, color: "text-orange-400" },
-                { id: "c2", title: "ڈیپ فریزر / فریج", fee: 5, icon: "fa-snowflake", target: 20000, current: 8430, color: "text-blue-400" },
-                { id: "c3", title: "70cc موٹر سائیکل", fee: 5, icon: "fa-motorcycle", target: 25000, current: 14200, color: "text-emerald-400" },
-                { id: "c4", title: "آئی فون 15 / 16 Pro", fee: 10, icon: "fa-mobile-screen-button", target: 35000, current: 21900, color: "text-purple-400" }
+                { 
+                    id: "c1", 
+                    title: "Electric / Gas Heater", 
+                    fee: 2, 
+                    image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80", 
+                    target: 3500, 
+                    current: 1240 
+                },
+                { 
+                    id: "c2", 
+                    title: "Deep Refrigerator", 
+                    fee: 5, 
+                    image: "https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=600&q=80", 
+                    target: 20000, 
+                    current: 8430 
+                },
+                { 
+                    id: "c3", 
+                    title: "70cc Motorcycle", 
+                    fee: 5, 
+                    image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=600&q=80", 
+                    target: 25000, 
+                    current: 14200 
+                },
+                { 
+                    id: "c4", 
+                    title: "iPhone 15 / 16 Pro", 
+                    fee: 10, 
+                    image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=80", 
+                    target: 35000, 
+                    current: 21900 
+                }
             ],
-            // Ledger Ledger Records
             ledger: [],
             pendingDeposits: []
         };
 
-        // Skill-based Quiz Repository
+        // Skill Quiz Database
         const quizBank = [
-            { q: "پاکستان کا دارالحکومت کون سا ہے؟", options: ["لاہور", "اسلام آباد", "کراچی"], correct: 1 },
-            { q: "پاکستان کی قومی زبان کون سی ہے؟", options: ["اردو", "انگلش", "پنجابی"], correct: 0 },
-            { q: "کمپیوٹر کا دماغ کسے کہا جاتا ہے؟", options: ["RAM", "CPU", "Hard Drive"], correct: 1 },
-            { q: "10 میں 5 جمع کرنے سے کیا حاصل ہوگا؟", options: ["12", "15", "20"], correct: 1 }
+            { q: "What is the capital of Pakistan?", options: ["Lahore", "Islamabad", "Karachi"], correct: 1 },
+            { q: "What is the national language of Pakistan?", options: ["Urdu", "English", "Punjabi"], correct: 0 },
+            { q: "Which part is considered the brain of a computer?", options: ["RAM", "CPU", "Hard Drive"], correct: 1 },
+            { q: "What is 15 + 5?", options: ["18", "20", "25"], correct: 1 }
         ];
 
         // App Initialization
@@ -273,44 +314,48 @@
             rotateDepositAccount();
         });
 
-        // Render Contests
+        // Render Contests Cards
         function renderContests() {
             const container = document.getElementById('contests-container');
             container.innerHTML = state.contests.map(c => {
                 const percent = Math.floor((c.current / c.target) * 100);
                 return `
-                    <div class="bg-slate-900 border border-slate-800 hover:border-amber-500/40 rounded-2xl p-5 shadow-xl transition flex flex-col justify-between">
+                    <div class="bg-slate-900 border border-slate-800 hover:border-amber-500/40 rounded-2xl overflow-hidden shadow-xl transition flex flex-col justify-between group">
                         <div>
-                            <div class="flex justify-between items-center mb-3">
-                                <i class="fa-solid ${c.icon} ${c.color} text-3xl"></i>
-                                <span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-bold px-3 py-1 rounded-full">
-                                    فیس: ${c.fee} PKR
-                                </span>
-                            </div>
-                            <h3 class="font-bold text-lg text-slate-100 mb-2">${c.title}</h3>
-                            <div class="space-y-1 mb-4">
-                                <div class="flex justify-between text-xs text-slate-400">
-                                    <span>اینٹریز پروگریس</span>
-                                    <span>${c.current} / ${c.target} (${percent}%)</span>
+                            <div class="relative h-44 overflow-hidden bg-slate-950">
+                                <img src="${c.image}" alt="${c.title}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                <div class="absolute top-3 right-3 bg-slate-950/80 backdrop-blur-md border border-amber-500/30 text-amber-400 text-xs font-bold px-3 py-1 rounded-full">
+                                    Entry: ${c.fee} PKR
                                 </div>
-                                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                                    <div class="bg-amber-500 h-full transition-all duration-500" style="width: ${percent}%"></div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-bold text-base text-white mb-2">${c.title}</h3>
+                                <div class="space-y-1 mb-2">
+                                    <div class="flex justify-between text-[11px] text-slate-400">
+                                        <span>Progress</span>
+                                        <span class="font-semibold text-slate-200">${c.current} / ${c.target} (${percent}%)</span>
+                                    </div>
+                                    <div class="w-full bg-slate-950 h-2 rounded-full overflow-hidden border border-slate-800">
+                                        <div class="bg-amber-500 h-full transition-all duration-500" style="width: ${percent}%"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <button onclick="startContestEntry('${c.id}')" class="w-full bg-slate-800 hover:bg-amber-500 hover:text-slate-950 border border-slate-700 text-amber-400 font-bold py-2 rounded-xl transition text-sm flex justify-center items-center gap-2">
-                            <i class="fa-solid fa-ticket"></i> مقابلے میں حصہ لیں
-                        </button>
+                        <div class="p-4 pt-0">
+                            <button onclick="startContestEntry('${c.id}')" class="w-full bg-slate-800 hover:bg-amber-500 hover:text-slate-950 border border-slate-700 text-amber-400 font-bold py-2 rounded-xl transition text-xs flex justify-center items-center gap-2 active:scale-95">
+                                <i class="fa-solid fa-ticket"></i> Join Giveaway (Rs. ${c.fee})
+                            </button>
+                        </div>
                     </div>
                 `;
             }).join('');
         }
 
-        // Handle Entry Attempt
+        // Contest Entry Handler
         function startContestEntry(contestId) {
             const contest = state.contests.find(c => c.id === contestId);
             if (state.userBalance < contest.fee) {
-                alert(`آپ کا بیلنس کم ہے۔ اس مقابلے کے لیے ${contest.fee} PKR درکار ہیں۔ براہ کرم پہلے والٹ ریچارج کریں۔`);
+                alert(`Insufficient balance! This contest requires ${contest.fee} PKR. Please add funds to your wallet.`);
                 openModal('deposit-modal');
                 return;
             }
@@ -318,16 +363,16 @@
             openQuizModal();
         }
 
-        // Quiz Logic
+        // Quiz Logic Engine
         function openQuizModal() {
             const quiz = quizBank[Math.floor(Math.random() * quizBank.length)];
             document.getElementById('quiz-question').innerText = quiz.q;
             
             const optionsContainer = document.getElementById('quiz-options');
             optionsContainer.innerHTML = quiz.options.map((opt, idx) => `
-                <button onclick="validateQuizAnswer(${idx}, ${quiz.correct})" class="w-full bg-slate-900 hover:bg-amber-500/20 border border-slate-700 text-right px-4 py-2.5 rounded-lg text-xs text-slate-200 transition flex justify-between items-center">
+                <button onclick="validateQuizAnswer(${idx}, ${quiz.correct})" class="w-full bg-slate-900 hover:bg-amber-500/20 border border-slate-800 text-left px-4 py-2.5 rounded-xl text-xs text-slate-200 transition flex justify-between items-center group">
                     <span>${opt}</span>
-                    <i class="fa-regular fa-circle text-slate-500"></i>
+                    <i class="fa-regular fa-circle text-slate-600 group-hover:text-amber-400"></i>
                 </button>
             `).join('');
 
@@ -337,4 +382,141 @@
         function validateQuizAnswer(selectedIndex, correctIndex) {
             closeModal('quiz-modal');
             if (selectedIndex === correctIndex) {
-                const contest = state.contests.find
+                const contest = state.contests.find(c => c.id === state.activeContestId);
+                
+                state.userBalance -= contest.fee;
+                contest.current += 1;
+
+                addLedgerEntry("Contest Entry Fee", `Joined ${contest.title}`, -contest.fee, "Successful");
+
+                document.getElementById('user-balance').innerText = state.userBalance;
+                renderContests();
+                renderLedger();
+
+                alert("Correct Answer! Your contest entry ticket has been registered.");
+            } else {
+                alert("Incorrect answer! In compliance with skill contest rules, no entry was registered and no amount was deducted.");
+            }
+        }
+
+        // Deposit Engine
+        function rotateDepositAccount() {
+            const acc = state.accounts[Math.floor(Math.random() * state.accounts.length)];
+            const box = document.getElementById('rotating-account-box');
+            box.innerHTML = `
+                <span class="text-[9px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full uppercase font-bold tracking-wider">Active Payment Option</span>
+                <p class="text-sm font-bold text-white mt-1">${acc.type}: <span class="text-amber-400">${acc.number}</span></p>
+                <p class="text-xs text-slate-400">Account Title: ${acc.title}</p>
+            `;
+        }
+
+        function handleDepositSubmit(e) {
+            e.preventDefault();
+            const amount = parseFloat(document.getElementById('deposit-amount').value);
+            const tid = document.getElementById('deposit-tid').value;
+
+            const pending = {
+                id: "USR" + Math.floor(1000 + Math.random() * 9000),
+                amount: amount,
+                tid: tid,
+                time: new Date().toLocaleTimeString()
+            };
+
+            state.pendingDeposits.push(pending);
+            closeModal('deposit-modal');
+            document.getElementById('deposit-form').reset();
+            rotateDepositAccount();
+
+            renderAdminPanel();
+            alert("Deposit request submitted! Once verified by admin, your balance will update automatically.");
+        }
+
+        // Admin Actions
+        function approveDeposit(idx) {
+            const item = state.pendingDeposits[idx];
+            state.userBalance += item.amount;
+            
+            addLedgerEntry("Wallet Deposit", `Manual Cash In (TID: ${item.tid})`, item.amount, "Verified");
+
+            state.pendingDeposits.splice(idx, 1);
+            document.getElementById('user-balance').innerText = state.userBalance;
+
+            renderLedger();
+            renderAdminPanel();
+        }
+
+        // Ledger Core
+        function addLedgerEntry(type, details, amount, status) {
+            state.ledger.unshift({
+                time: new Date().toLocaleString(),
+                type: type,
+                details: details,
+                amount: amount,
+                status: status
+            });
+        }
+
+        function renderLedger() {
+            const tbody = document.getElementById('user-ledger-body');
+            if (state.ledger.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-slate-500 text-xs">No transactions recorded yet.</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = state.ledger.map(row => `
+                <tr>
+                    <td class="py-3 px-4 text-slate-400 text-[11px]">${row.time}</td>
+                    <td class="py-3 px-4 font-semibold text-slate-200">${row.type}</td>
+                    <td class="py-3 px-4 text-slate-300 text-xs">${row.details}</td>
+                    <td class="py-3 px-4 font-bold ${row.amount > 0 ? 'text-emerald-400' : 'text-red-400'}">${row.amount > 0 ? '+' : ''}${row.amount} PKR</td>
+                    <td class="py-3 px-4 text-xs"><span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-full text-[10px]">${row.status}</span></td>
+                </tr>
+            `).join('');
+        }
+
+        function renderAdminPanel() {
+            const tbody = document.getElementById('admin-pending-body');
+            if (state.pendingDeposits.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-slate-500 text-xs">No pending approvals in queue.</td></tr>`;
+                return;
+            }
+            tbody.innerHTML = state.pendingDeposits.map((p, idx) => `
+                <tr>
+                    <td class="py-2.5 px-3 text-xs font-mono text-slate-400">${p.id}</td>
+                    <td class="py-2.5 px-3 text-xs font-mono text-amber-300">${p.tid}</td>
+                    <td class="py-2.5 px-3 text-xs font-bold text-emerald-400">${p.amount} PKR</td>
+                    <td class="py-2.5 px-3 text-xs text-slate-400">${p.time}</td>
+                    <td class="py-2.5 px-3">
+                        <button onclick="approveDeposit(${idx})" class="bg-emerald-600 hover:bg-emerald-500 text-white text-[10px] font-bold px-3 py-1 rounded-lg transition shadow">
+                            Approve Deposit
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // CSV Export Engine
+        function exportToCSV() {
+            if (state.ledger.length === 0) {
+                alert("No transactions available to export.");
+                return;
+            }
+            let csv = "Date,Type,Details,Amount,Status\n";
+            state.ledger.forEach(r => {
+                csv += `"${r.time}","${r.type}","${r.details}","${r.amount}","${r.status}"\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.setAttribute("download", `Full_Ledger_Report_${Date.now()}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Modal Helpers
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+    </script>
+</body>
+</html>
