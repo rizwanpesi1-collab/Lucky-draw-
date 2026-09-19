@@ -245,21 +245,21 @@
     <script>
         const ADMIN_PASSWORD = "admin123";
 
-        // 5 Payment Accounts List
+        // 5 Payment Accounts List (آپ اپنے اصل نمبرز یہاں لگا سکتے ہیں)
         const paymentAccounts = [
-            { type: "JazzCash", title: "محمد رضوان", number: "03001234561" },
-            { type: "EasyPaisa", title: "محمد رضوان", number: "03459876542" },
-            { type: "JazzCash (2)", title: "علی احمد", number: "03011122333" },
-            { type: "EasyPaisa (2)", title: "علی احمد", number: "03334445554" },
-            { type: "Raast ID", title: "خان ٹریڈرز", number: "03125554435" }
+            { type: "JazzCash", title: "آپ کا نام", number: "03000000000" },
+            { type: "EasyPaisa", title: "آپ کا نام", number: "03000000000" },
+            { type: "JazzCash (2)", title: "آپ کا نام", number: "03000000000" },
+            { type: "EasyPaisa (2)", title: "آپ کا نام", number: "03000000000" },
+            { type: "Raast ID", title: "آپ کا نام", number: "03000000000" }
         ];
 
-        // Default State Structure
+        // Default State Structure with Updated Refrigerator Image
         const defaultState = {
             userBalance: 0,
             activeContestId: null,
             contests: [
-                { id: "c1", code: "FRIDGE", title: "Deep Refrigerator", fee: 5, image: "https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=600&q=80", target: 20000, current: 0, ticketCounter: 0 },
+                { id: "c1", code: "FRIDGE", title: "Deep Refrigerator", fee: 5, image: "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=600&q=80", target: 20000, current: 0, ticketCounter: 0 },
                 { id: "c2", code: "BIKE", title: "70cc Motorcycle", fee: 5, image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=600&q=80", target: 25000, current: 0, ticketCounter: 0 },
                 { id: "c3", code: "IPHONE", title: "iPhone 15 / 16 Pro", fee: 10, image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=80", target: 35000, current: 0, ticketCounter: 0 }
             ],
@@ -268,26 +268,30 @@
             pendingDeposits: []
         };
 
-        // Easy General Knowledge Urdu Questions
+        // Complete & Easy General Knowledge Urdu Questions Bank
         const quizBank = [
             { q: "پاکستان کا قومی کھیل کون سا ہے؟", options: ["کرکٹ", "ہاکی", "فٹ بال"], correct: 1 },
             { q: "پاکستان کا قومی پھول کون سا ہے؟", options: ["چمبیلی (Jasmine)", "گلاب", "سورج مکھی"], correct: 0 },
             { q: "ایک ہفتے میں کتنے دن ہوتے ہیں؟", options: ["5 دن", "6 دن", "7 دن"], correct: 2 },
             { q: "سورج کس سمت سے نکلتا ہے؟", options: ["مغرب", "مشرق", "شمال"], correct: 1 },
             { q: "پاکستان کس سال آزاد ہوا؟", options: ["1947", "1950", "1965"], correct: 0 },
-            { q: "پاکستان کا قومی ترانہ کس نے لکھا؟", options: ["علامہ اقبال", "حفیظ جالندھری", "فیض احمد فیض"], correct: 1 }
+            { q: "پاکستان کا قومی ترانہ کس نے لکھا؟", options: ["علامہ اقبال", "حفیظ جالندھری", "فیض احمد فیض"], correct: 1 },
+            { q: "دنیا میں ایک سال میں کتنے مہینے ہوتے ہیں؟", options: ["10 مہینے", "12 مہینے", "14 مہینے"], correct: 1 },
+            { q: "پاکستان کے دارالحکومت کا نام کیا ہے؟", options: ["لاہور", "کراچی", "اسلام آباد"], correct: 2 },
+            { q: "ہمارے ملک کا نام کیا ہے؟", options: ["پاکستان", "بھارت", "چین"], correct: 0 },
+            { q: "ایک دن میں کتنے گھنٹے ہوتے ہیں؟", options: ["12 گھنٹے", "24 گھنٹے", "48 گھنٹے"], correct: 1 }
         ];
 
         // LOAD SAVED DATA (Prevents reset on page refresh)
-        let state = JSON.parse(localStorage.getItem('quiz_app_v5_state')) || defaultState;
+        let state = JSON.parse(localStorage.getItem('quiz_app_v6_state')) || defaultState;
 
         function saveState() {
-            localStorage.setItem('quiz_app_v5_state', JSON.stringify(state));
+            localStorage.setItem('quiz_app_v6_state', JSON.stringify(state));
         }
 
         function resetData() {
             if(confirm("کیا آپ واقعی تمام ڈیٹا اور بیلنس صفر کرنا چاہتے ہیں؟")) {
-                localStorage.removeItem('quiz_app_v5_state');
+                localStorage.removeItem('quiz_app_v6_state');
                 state = JSON.parse(JSON.stringify(defaultState));
                 saveState();
                 location.reload();
