@@ -150,9 +150,6 @@
                         <span class="bg-red-500/20 text-red-400 text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">Protected Admin Access</span>
                         <h3 class="text-lg font-bold text-white mt-1">Manual Deposit Approvals</h3>
                     </div>
-                    <button onclick="exportToCSV()" class="bg-slate-900 hover:bg-slate-800 text-amber-400 border border-amber-500/30 text-xs font-bold px-4 py-2 rounded-xl transition flex items-center gap-2">
-                        <i class="fa-solid fa-file-csv text-base"></i> Export Ledger (CSV)
-                    </button>
                 </div>
 
                 <div class="space-y-3">
@@ -195,7 +192,7 @@
         </div>
     </div>
 
-    <!-- MODAL 2: Deposit Balance (5 Accounts List) -->
+    <!-- MODAL 2: Deposit Balance -->
     <div id="deposit-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden p-4">
         <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative shadow-2xl max-h-[90vh] overflow-y-auto">
             <button onclick="closeModal('deposit-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-white">
@@ -205,10 +202,8 @@
             <h3 class="text-lg font-bold text-amber-400 mb-1">بیلنس جمع کروائیں (Deposit)</h3>
             <p class="text-xs text-slate-400 mb-4">نیچے دیے گئے کسی بھی نمبر پر رقم بھیجیں اور پھر فارم پر ٹرانزیکشن ID لکھ کر سبمٹ کریں:</p>
 
-            <!-- 5 Accounts List Container -->
             <div class="space-y-2 mb-5" id="accounts-list-container"></div>
 
-            <!-- Deposit Form -->
             <form id="deposit-form" onsubmit="handleDepositSubmit(event)" class="space-y-4 border-t border-slate-800 pt-4">
                 <div>
                     <label class="block text-xs text-slate-400 mb-1">بھیجی گئی رقم (PKR)</label>
@@ -245,7 +240,6 @@
     <script>
         const ADMIN_PASSWORD = "admin123";
 
-        // 5 Payment Accounts List (آپ اپنے اصل نمبرز یہاں لگا سکتے ہیں)
         const paymentAccounts = [
             { type: "JazzCash", title: "آپ کا نام", number: "03000000000" },
             { type: "EasyPaisa", title: "آپ کا نام", number: "03000000000" },
@@ -254,21 +248,38 @@
             { type: "Raast ID", title: "آپ کا نام", number: "03000000000" }
         ];
 
-        // Default State Structure with Updated Refrigerator Image
+        // Default State (iPhone Target: 4,60,000 PKR, Fee: 20 PKR)
         const defaultState = {
             userBalance: 0,
             activeContestId: null,
             contests: [
-                { id: "c1", code: "FRIDGE", title: "Deep Refrigerator", fee: 5, image: "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=600&q=80", target: 20000, current: 0, ticketCounter: 0 },
+                { 
+                    id: "c1", 
+                    code: "FRIDGE", 
+                    title: "Deep Refrigerator", 
+                    fee: 2, 
+                    image: "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=600&q=80", 
+                    target: 75000, 
+                    current: 0, 
+                    ticketCounter: 0 
+                },
                 { id: "c2", code: "BIKE", title: "70cc Motorcycle", fee: 5, image: "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=600&q=80", target: 25000, current: 0, ticketCounter: 0 },
-                { id: "c3", code: "IPHONE", title: "iPhone 15 / 16 Pro", fee: 10, image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=80", target: 35000, current: 0, ticketCounter: 0 }
+                { 
+                    id: "c3", 
+                    code: "IPHONE", 
+                    title: "iPhone 16 Pro Max", 
+                    fee: 20, 
+                    image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=80", 
+                    target: 460000, 
+                    current: 0, 
+                    ticketCounter: 0 
+                }
             ],
             tickets: [],
             ledger: [],
             pendingDeposits: []
         };
 
-        // Complete & Easy General Knowledge Urdu Questions Bank
         const quizBank = [
             { q: "پاکستان کا قومی کھیل کون سا ہے؟", options: ["کرکٹ", "ہاکی", "فٹ بال"], correct: 1 },
             { q: "پاکستان کا قومی پھول کون سا ہے؟", options: ["چمبیلی (Jasmine)", "گلاب", "سورج مکھی"], correct: 0 },
@@ -282,16 +293,15 @@
             { q: "ایک دن میں کتنے گھنٹے ہوتے ہیں؟", options: ["12 گھنٹے", "24 گھنٹے", "48 گھنٹے"], correct: 1 }
         ];
 
-        // LOAD SAVED DATA (Prevents reset on page refresh)
-        let state = JSON.parse(localStorage.getItem('quiz_app_v6_state')) || defaultState;
+        let state = JSON.parse(localStorage.getItem('quiz_app_v8_state')) || defaultState;
 
         function saveState() {
-            localStorage.setItem('quiz_app_v6_state', JSON.stringify(state));
+            localStorage.setItem('quiz_app_v8_state', JSON.stringify(state));
         }
 
         function resetData() {
             if(confirm("کیا آپ واقعی تمام ڈیٹا اور بیلنس صفر کرنا چاہتے ہیں؟")) {
-                localStorage.removeItem('quiz_app_v6_state');
+                localStorage.removeItem('quiz_app_v8_state');
                 state = JSON.parse(JSON.stringify(defaultState));
                 saveState();
                 location.reload();
@@ -435,7 +445,7 @@
                 const contest = state.contests.find(c => c.id === state.activeContestId);
 
                 contest.ticketCounter += 1;
-                contest.current += 1;
+                contest.current += contest.fee;
                 state.userBalance -= contest.fee;
 
                 const formattedNumber = String(contest.ticketCounter).padStart(3, '0');
